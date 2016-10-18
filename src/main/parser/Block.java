@@ -3,6 +3,7 @@ package parser;
 
 import main.Main;
 import scanner.Scanner;
+
 import static scanner.TokenKind.*;
 
 import java.util.ArrayList;
@@ -44,12 +45,12 @@ public class Block extends PascalSyntax {
             Main.log.prettyPrintLn("");
 
         //print func decls
-        if (procDecls.size() > 0){
+        if (procDecls.size() > 0) {
             procDecls.values().forEach(ProcDecl::prettyPrint);
         }
 
         //print proc decls
-        if (funcDecls.size() > 0){
+        if (funcDecls.size() > 0) {
             funcDecls.values().forEach(FuncDecl::prettyPrint);
         }
 
@@ -66,8 +67,12 @@ public class Block extends PascalSyntax {
 
         Block block = new Block(scanner.curLineNum());
 
-        if (scanner.nextToken.kind == constToken) block.constDeclPart = ConstDeclPart.parse(scanner);
-        if (scanner.nextToken.kind == varToken) block.varDeclPart = VarDeclPart.parse(scanner);
+        if (scanner.curToken.kind == constToken) {
+            block.constDeclPart = ConstDeclPart.parse(scanner);
+        }
+        if (scanner.curToken.kind == varToken) {
+            block.varDeclPart = VarDeclPart.parse(scanner);
+        }
 
         while (scanner.nextToken.kind == functionToken || scanner.nextToken.kind == procedureToken) {
             if (scanner.nextToken.kind == functionToken) {
