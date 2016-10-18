@@ -19,7 +19,7 @@ public class CharLiteral extends UnsignedConstant {
 
     @Override
     public void prettyPrint() {
-        Main.log.prettyPrint(charVal);
+        Main.log.prettyPrint("'" + charVal + "'");
     }
 
     public static CharLiteral parse(Scanner s) {

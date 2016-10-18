@@ -25,7 +25,7 @@ public class ProcCallStatm extends Statement {
 
     @Override
     public void prettyPrint() {
-        Main.log.prettyIndent();
+
         Main.log.prettyPrint(funcName);
         int counter = params.size();
         if (params.size() != 0) {
@@ -38,11 +38,12 @@ public class ProcCallStatm extends Statement {
                 }
                 Main.log.prettyPrint(", ");
             }
-            Main.log.prettyPrint(")");
+            Main.log.prettyPrint(");");
         } else {
-            Main.log.prettyPrint("( )");
+            Main.log.prettyPrint("( );");
         }
-        Main.log.prettyOutdent();
+        /*Main.log.prettyIndent();
+        Main.log.prettyOutdent();*/
     }
 
     static ProcCallStatm parse(Scanner s) {

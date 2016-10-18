@@ -13,6 +13,13 @@ class WhileStatm extends Statement {
         super(lNum);
     }
 
+    public void prettyPrint(){
+        Main.log.prettyPrint("while ");
+        expr.prettyPrint();
+        Main.log.prettyPrint(" do ");
+        body.prettyPrint();
+    }
+
     @Override
     public String identify() {
         return "<while-statm> on line " + lineNum;
