@@ -1,5 +1,6 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
 
 import static scanner.TokenKind.*;
@@ -15,7 +16,8 @@ public class VarDecl extends PascalDecl{
 
     @Override
     void prettyPrint() {
-
+        Main.log.prettyPrint(name + ": ");
+        type.prettyPrint();
     }
 
     @Override

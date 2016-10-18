@@ -1,5 +1,6 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
 import static scanner.TokenKind.*;
 
@@ -11,7 +12,7 @@ public class TypeName extends Type {
 
     @Override
     void prettyPrint() {
-
+        Main.log.prettyPrint(name);
     }
 
     @Override

@@ -3,7 +3,7 @@ package parser;
 import scanner.Scanner;
 
 import static scanner.TokenKind.*;
-
+import static main.Main.log;
 
 public class ArrayType extends Type {
     Constant const1, const2;
@@ -14,7 +14,12 @@ public class ArrayType extends Type {
 
     @Override
     void prettyPrint() {
-
+        log.prettyPrint("array[");
+        const1.prettyPrint();
+        log.prettyPrint("..");
+        const2.prettyPrint();
+        log.prettyPrint("] of ");
+        type.prettyPrint();
     }
 
     @Override

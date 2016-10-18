@@ -31,7 +31,7 @@ public class StatmList extends PascalSyntax {
     }
 
     public static StatmList parse(Scanner scanner) {
-        enterParser("statm paramDecls");
+        enterParser("statm list");
 
         StatmList sl = new StatmList(scanner.curLineNum());
         Statement statm = Statement.parse(scanner);
@@ -42,7 +42,7 @@ public class StatmList extends PascalSyntax {
             sl.statmList.add(statm);
         }
 
-        leaveParser("statm paramDecls");
+        leaveParser("statm list");
         return sl;
     }
 }

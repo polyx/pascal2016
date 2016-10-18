@@ -20,13 +20,18 @@ public class Constant extends PascalSyntax {
 
     @Override
     public void prettyPrint() {
+        if (prefix != null){
+            prefix.prettyPrint();
+        }
         constant.prettyPrint();
     }
 
     public static Constant parse(Scanner s) {
         enterParser("constant");
         Constant c = new Constant(s.curLineNum());
-        c.prefix = PrefixOperator.parse(s);
+        if (s.curToken.kind == TokenKind.subtractToken || s.curToken.kind == TokenKind.addToken) {
+            c.prefix = PrefixOperator.parse(s);
+        }
         c.constant = UnsignedConstant.parse(s);
         leaveParser("constant");
         return c;

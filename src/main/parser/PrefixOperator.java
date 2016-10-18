@@ -19,7 +19,7 @@ public class PrefixOperator extends Operator {
 
     @Override
     public void prettyPrint() {
-        Main.log.prettyPrint(" " + name + " ");
+        Main.log.prettyPrint(name);
     }
 
     static PrefixOperator parse(Scanner s) {
@@ -27,13 +27,12 @@ public class PrefixOperator extends Operator {
         PrefixOperator operator = new PrefixOperator(s.curLineNum());
 
         operator.name = s.curToken.kind.toString();
-        switch (s.curToken.kind) {
-            case subtractToken:
-                s.skip(subtractToken);
-                break;
-            case addToken:
-                s.skip(addToken);
-                break;
+        if (s.curToken.kind == TokenKind.subtractToken) {
+            s.skip(subtractToken);
+
+        } else if (s.curToken.kind == TokenKind.addToken) {
+            s.skip(addToken);
+
         }
 
         leaveParser("prefix-operator");

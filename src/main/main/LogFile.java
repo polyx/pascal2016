@@ -129,8 +129,9 @@ public class LogFile {
     private void noteParserInfo(String name) {
 	String logLine = "Parser:   ";
 	for (int i = 1;  i <= parseLevel;  ++i) logLine += "  ";
-	writeLogLine(logLine + "<" + name + ">");
-    }
+		writeLogLine(logLine + "<" + name + ">");
+		System.out.println(logLine + "<" + name + ">");
+	}
 
 
     public void prettyPrint(String s) {
