@@ -20,6 +20,7 @@ public class Block extends PascalSyntax {
     Block(int lNum) {
         super(lNum);
         funcDecls = new HashMap<>();
+        procDecls = new HashMap<>();
     }
 
     @Override
