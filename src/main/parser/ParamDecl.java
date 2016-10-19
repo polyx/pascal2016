@@ -22,13 +22,13 @@ public class ParamDecl extends PascalDecl {
         paramType.prettyPrint();
     }
 
-    public static ParamDecl parse(Scanner s) {
+    public static ParamDecl parse(Scanner scanner) {
         enterParser("param decl");
 
-        ParamDecl paramDecl = new ParamDecl(s.curToken.id, s.curLineNum());
-        s.skip(nameToken);
-        s.skip(colonToken);
-        paramDecl.paramType = TypeName.parse(s);
+        ParamDecl paramDecl = new ParamDecl(scanner.curToken.id, scanner.curLineNum());
+        scanner.skip(nameToken);
+        scanner.skip(colonToken);
+        paramDecl.paramType = TypeName.parse(scanner);
 
         leaveParser("param decl");
         return paramDecl;

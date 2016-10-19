@@ -35,19 +35,19 @@ public class ParamDeclList extends PascalSyntax {
         Main.log.prettyPrint(")");
     }
 
-    public static ParamDeclList parse(Scanner s) {
+    public static ParamDeclList parse(Scanner scanner) {
         enterParser("param decl list");
 
-        ParamDeclList declList = new ParamDeclList(s.curLineNum());
-        s.skip(leftParToken);
+        ParamDeclList declList = new ParamDeclList(scanner.curLineNum());
+        scanner.skip(leftParToken);
 
-        declList.paramDecls.add(ParamDecl.parse(s));
+        declList.paramDecls.add(ParamDecl.parse(scanner));
 
-        while (s.curToken.kind == semicolonToken) { // loops untill we have parsed all declarations
-            s.skip(semicolonToken);
-            declList.paramDecls.add(ParamDecl.parse(s));
+        while (scanner.curToken.kind == semicolonToken) { // loops untill we have parsed all declarations
+            scanner.skip(semicolonToken);
+            declList.paramDecls.add(ParamDecl.parse(scanner));
         }
-        s.skip(rightParToken);
+        scanner.skip(rightParToken);
 
         leaveParser("param decl list");
         return declList;

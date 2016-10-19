@@ -22,14 +22,14 @@ public class Negation extends Factor {
         fact.prettyPrint();
     }
 
-    static Negation parse(Scanner s) {
+    static Negation parse(Scanner scanner) {
         enterParser("negation");
-        Negation n = new Negation(s.curLineNum());
+        Negation negation = new Negation(scanner.curLineNum());
 
-        s.skip(notToken);
-        n.fact = Factor.parse(s);
+        scanner.skip(notToken);
+        negation.fact = Factor.parse(scanner);
 
         leaveParser("negation");
-        return n;
+        return negation;
     }
 }

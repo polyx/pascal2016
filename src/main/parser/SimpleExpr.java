@@ -8,8 +8,8 @@ public class SimpleExpr extends PascalSyntax {
     PrefixOperator prefixOper;
     Term term;
     TermOperator termOper;
-    ArrayList<Term> termList = new ArrayList<Term>();
-    ArrayList<TermOperator> termOperList = new ArrayList<TermOperator>();
+    ArrayList<Term> termList = new ArrayList<>();
+    ArrayList<TermOperator> termOperList = new ArrayList<>();
 
     SimpleExpr(int lNum) {
         super(lNum);
@@ -32,22 +32,22 @@ public class SimpleExpr extends PascalSyntax {
         }
     }
 
-    static SimpleExpr parse(Scanner s) {
+    static SimpleExpr parse(Scanner scanner) {
         enterParser("simple expr");
 
-        SimpleExpr se = new SimpleExpr(s.curLineNum());
+        SimpleExpr se = new SimpleExpr(scanner.curLineNum());
 
-        if (s.curToken.kind.isPrefixOpr())
-            se.prefixOper = PrefixOperator.parse(s);
-
-        se.term = Term.parse(s);
-        se.termList.add(se.term);
-        while (s.curToken.kind.isTermOpr()) {
-            se.termOper = TermOperator.parse(s);
-            se.termOperList.add(se.termOper);
-            se.term = Term.parse(s);
-            se.termList.add(se.term);
+        if (scanner.curToken.kind.isPrefixOpr()) {
+            se.prefixOper = PrefixOperator.parse(scanner);
         }
+
+        se.term = Term.parse(scanner);
+        se.termList.add(se.term);
+        while (scanner.curToken.kind.isTermOpr()) {
+            se.termOperList.add(TermOperator.parse(scanner));
+            se.termList.add(Term.parse(scanner));
+        }
+
         leaveParser("simple expr");
         return se;
     }

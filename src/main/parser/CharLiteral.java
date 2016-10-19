@@ -22,12 +22,13 @@ public class CharLiteral extends UnsignedConstant {
         Main.log.prettyPrint("'" + charVal + "'");
     }
 
-    public static CharLiteral parse(Scanner s) {
+    public static CharLiteral parse(Scanner scanner) {
         enterParser("char literal");
 
-        CharLiteral charLiteral = new CharLiteral(s.curLineNum());
-        charLiteral.charVal = String.valueOf(s.curToken.charVal);
-        s.skip(charValToken);
+        CharLiteral charLiteral = new CharLiteral(scanner.curLineNum());
+        charLiteral.charVal = String.valueOf(scanner.curToken.charVal);
+        scanner.skip(charValToken);
+
         leaveParser("char literal");
         return charLiteral;
     }

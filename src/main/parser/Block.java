@@ -48,15 +48,16 @@ public class Block extends PascalSyntax {
         //print func decls
         if (procDecls.size() > 0) {
             procDecls.forEach(ProcDecl::prettyPrint);
+            Main.log.prettyPrintLn("");
         }
 
         //print proc decls
         if (funcDecls.size() > 0) {
             funcDecls.forEach(FuncDecl::prettyPrint);
+            Main.log.prettyPrintLn("");
         }
 
 
-        //Main.log.prettyPrintLn();
         Main.log.prettyPrintLn("begin");
         Main.log.prettyIndent();
         statmList.prettyPrint();
@@ -69,7 +70,7 @@ public class Block extends PascalSyntax {
 
         Block block = new Block(scanner.curLineNum());
 
-       if (scanner.curToken.kind == constToken) {
+        if (scanner.curToken.kind == constToken) {
             block.constDeclPart = ConstDeclPart.parse(scanner);
         }
         if (scanner.curToken.kind == varToken) {
@@ -78,12 +79,11 @@ public class Block extends PascalSyntax {
 
         while (scanner.curToken.kind == functionToken || scanner.curToken.kind == procedureToken) {
             if (scanner.curToken.kind == functionToken) {
-                FuncDecl fd = FuncDecl.parse(scanner);
-                block.funcDecls.add(fd);
-
+                FuncDecl func = FuncDecl.parse(scanner);
+                block.funcDecls.add(func);
             } else if (scanner.curToken.kind == procedureToken) {
-                ProcDecl pd = ProcDecl.parse(scanner);
-                block.procDecls.add(pd);
+                ProcDecl proc = ProcDecl.parse(scanner);
+                block.procDecls.add(proc);
 
             }
         }

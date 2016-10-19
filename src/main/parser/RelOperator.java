@@ -24,33 +24,27 @@ public class RelOperator extends Operator {
         Main.log.prettyPrint(" " + token + " ");
     }
 
-    static RelOperator parse(Scanner s) {
+    static RelOperator parse(Scanner scanner) {
         enterParser("rel opr");
-        RelOperator ro = new RelOperator(s.curLineNum());
+        RelOperator relOperator = new RelOperator(scanner.curLineNum());
 
-        ro.token = s.curToken.kind.toString();
-        switch (s.curToken.kind) {
-            case equalToken:
-                s.skip(equalToken);
-                break;
-            case notEqualToken:
-                s.skip(notEqualToken);
-                break;
-            case greaterToken:
-                s.skip(greaterToken);
-                break;
-            case lessEqualToken:
-                s.skip(lessEqualToken);
-                break;
-            case lessToken:
-                s.skip(lessToken);
-                break;
-            case greaterEqualToken:
-                s.skip(greaterEqualToken);
-                break;
+        relOperator.token = scanner.curToken.kind.toString();
+
+        if (scanner.curToken.kind == equalToken) {
+            scanner.skip(equalToken);
+        } else if (scanner.curToken.kind == notEqualToken) {
+            scanner.skip(notEqualToken);
+        } else if (scanner.curToken.kind == greaterToken) {
+            scanner.skip(greaterToken);
+        } else if (scanner.curToken.kind == lessEqualToken) {
+            scanner.skip(lessEqualToken);
+        } else if (scanner.curToken.kind == lessToken) {
+            scanner.skip(lessToken);
+        } else if (scanner.curToken.kind == greaterEqualToken) {
+            scanner.skip(greaterEqualToken);
         }
 
         leaveParser("rel opr");
-        return ro;
+        return relOperator;
     }
 }

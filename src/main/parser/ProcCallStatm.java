@@ -40,6 +40,7 @@ public class ProcCallStatm extends Statement {
         } else {
             Main.log.prettyPrint("( );");
         }
+        Main.log.prettyPrintLn("");
         /*Main.log.prettyIndent();
         Main.log.prettyOutdent();*/
     }

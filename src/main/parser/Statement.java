@@ -1,6 +1,9 @@
 package parser;
 
+import main.Main;
 import scanner.Scanner;
+
+import static scanner.TokenKind.*;
 
 public abstract class Statement extends PascalSyntax {
     static Statement statm;
@@ -20,35 +23,35 @@ public abstract class Statement extends PascalSyntax {
     }
 
 
-    static Statement parse(Scanner s) {
+    static Statement parse(Scanner scanner) {
         enterParser("statement");
 
-        if (s.curToken.kind == scanner.TokenKind.nameToken) {
-            if (s.nextToken.kind == scanner.TokenKind.leftBracketToken) {
-                statm = AssignStatm.parse(s);
+        if (scanner.curToken.kind == nameToken) {
+            if (scanner.nextToken.kind == leftBracketToken) {
+                statm = AssignStatm.parse(scanner);
 
-            } else if (s.nextToken.kind == scanner.TokenKind.leftParToken) {
-                statm = ProcCallStatm.parse(s);
+            } else if (scanner.nextToken.kind == leftParToken) {
+                statm = ProcCallStatm.parse(scanner);
 
-            } else if (s.nextToken.kind == scanner.TokenKind.assignToken) {
-                statm = AssignStatm.parse(s);
+            } else if (scanner.nextToken.kind == assignToken) {
+                statm = AssignStatm.parse(scanner);
 
             } else {
-                statm = ProcCallStatm.parse(s);
+                statm = ProcCallStatm.parse(scanner);
 
             }
 
-        } else if (s.curToken.kind == scanner.TokenKind.beginToken) {
-            statm = CompoundStatm.parse(s);
+        } else if (scanner.curToken.kind == beginToken) {
+            statm = CompoundStatm.parse(scanner);
 
-        } else if (s.curToken.kind == scanner.TokenKind.ifToken) {
-            statm = IfStatm.parse(s);
+        } else if (scanner.curToken.kind == ifToken) {
+            statm = IfStatm.parse(scanner);
 
-        } else if (s.curToken.kind == scanner.TokenKind.whileToken) {
-            statm = WhileStatm.parse(s);
+        } else if (scanner.curToken.kind == whileToken) {
+            statm = WhileStatm.parse(scanner);
 
         } else {
-            statm = EmptyStatm.parse(s);
+            statm = EmptyStatm.parse(scanner);
 
         }
 

@@ -16,10 +16,7 @@ public class StatmList extends PascalSyntax {
 
     @Override
     void prettyPrint() {
-        for (Statement statm : statmList) {
-            statm.prettyPrint();
-            Main.log.prettyPrintLn();
-        }
+        statmList.forEach(Statement::prettyPrint);
     }
 
     @Override
@@ -31,12 +28,12 @@ public class StatmList extends PascalSyntax {
         enterParser("statm list");
 
         StatmList sl = new StatmList(scanner.curLineNum());
-        Statement statm = Statement.parse(scanner);
-        sl.statmList.add(statm);
+
+        sl.statmList.add(Statement.parse(scanner));
+
         while (scanner.curToken.kind == semicolonToken) {
             scanner.skip(semicolonToken);
-            statm = Statement.parse(scanner);
-            sl.statmList.add(statm);
+            sl.statmList.add(Statement.parse(scanner));
         }
 
         leaveParser("statm list");

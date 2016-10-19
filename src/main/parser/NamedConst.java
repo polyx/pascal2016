@@ -19,12 +19,12 @@ public class NamedConst extends UnsignedConstant {
         Main.log.prettyPrint(name);
     }
 
-    public static NamedConst parse(Scanner s) {
+    public static NamedConst parse(Scanner scanner) {
         enterParser("named-const");
 
-        NamedConst nameConst = new NamedConst(s.curLineNum());
-        nameConst.name = s.curToken.id;
-        s.skip(nameToken);
+        NamedConst nameConst = new NamedConst(scanner.curLineNum());
+        nameConst.name = scanner.curToken.id;
+        scanner.skip(nameToken);
 
         leaveParser("named-const");
         return nameConst;

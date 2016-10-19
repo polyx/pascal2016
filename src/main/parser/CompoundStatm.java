@@ -20,22 +20,23 @@ public class CompoundStatm extends Statement {
             Main.log.prettyIndent();
                 Main.log.prettyPrintLn("begin");
                 Main.log.prettyIndent();
-                sl.prettyPrint();
+                    sl.prettyPrint();
                 Main.log.prettyOutdent();
             Main.log.prettyPrint("end");
         Main.log.prettyOutdent();
+        Main.log.prettyPrintLn("");
 
     }
 
-    static CompoundStatm parse(Scanner s) {
+    static CompoundStatm parse(Scanner scanner) {
         enterParser("compound statm");
-        CompoundStatm cp = new CompoundStatm(s.curLineNum());
+        CompoundStatm compoundStatm = new CompoundStatm(scanner.curLineNum());
 
-        s.skip(beginToken);
-        cp.sl = StatmList.parse(s);
-        s.skip(endToken);
+        scanner.skip(beginToken);
+        compoundStatm.sl = StatmList.parse(scanner);
+        scanner.skip(endToken);
 
         leaveParser("compound statm");
-        return cp;
+        return compoundStatm;
     }
 }

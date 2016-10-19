@@ -27,22 +27,22 @@ public class VarDeclPart extends PascalSyntax {
         Main.log.prettyIndent();
         Main.log.prettyPrintLn();
 
-        for (VarDecl v : varList) {
-            v.prettyPrint();
+        varList.forEach(varDecl -> {
+            varDecl.prettyPrint();
             Main.log.prettyPrintLn();
-        }
+        });
 
         Main.log.prettyOutdent();
     }
 
-    public static VarDeclPart parse(Scanner s) {
+    public static VarDeclPart parse(Scanner scanner) {
         enterParser("var decl part");
 
-        VarDeclPart varDeclPart = new VarDeclPart(s.curLineNum());
-        s.skip(varToken);
+        VarDeclPart varDeclPart = new VarDeclPart(scanner.curLineNum());
+        scanner.skip(varToken);
 
-        while (s.curToken.kind == nameToken) {
-            varDeclPart.varList.add(VarDecl.parse(s));
+        while (scanner.curToken.kind == nameToken) {
+            varDeclPart.varList.add(VarDecl.parse(scanner));
         }
 
         leaveParser("var decl part");

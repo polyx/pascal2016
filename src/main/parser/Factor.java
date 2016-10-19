@@ -22,30 +22,30 @@ abstract class Factor extends PascalSyntax {
         if (factor != null) factor.prettyPrint();
     }
 
-    static Factor parse(Scanner s) {
+    static Factor parse(Scanner scanner) {
         enterParser("factor");
-        TokenKind tokenKind = s.curToken.kind;
+        TokenKind tokenKind = scanner.curToken.kind;
 
         //either func call or variable reference reference
         if(tokenKind == nameToken){
-            if (s.nextToken.kind == leftBracketToken){ // array reference
-                factor = Variable.parse(s);
-            }else if (s.nextToken.kind == leftParToken){ // func call
-                factor = FuncCall.parse(s);
+            if (scanner.nextToken.kind == leftBracketToken){ // array reference
+                factor = Variable.parse(scanner);
+            }else if (scanner.nextToken.kind == leftParToken){ // func call
+                factor = FuncCall.parse(scanner);
             }else {
-                factor = Variable.parse(s);
+                factor = Variable.parse(scanner);
             }
         // unsigned constant, ignoring named token and treating name tokens as variable above;
         // TODO: fix in part 3 as per piazza comment from Dag.
         }else if (tokenKind == intValToken || tokenKind == charValToken){
-            factor = UnsignedConstant.parse(s);
+            factor = UnsignedConstant.parse(scanner);
         }else if(tokenKind == leftParToken){ //inner condition
-            factor = InnerExpr.parse(s);
+            factor = InnerExpr.parse(scanner);
         }else if(tokenKind == notToken){ //negation
-            factor = Negation.parse(s);
+            factor = Negation.parse(scanner);
         }else{
             //give error if didnt find any of the above saying that we expect factor
-            s.testError("factor");
+            scanner.testError("factor");
         }
 
         leaveParser("factor");

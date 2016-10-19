@@ -26,14 +26,14 @@ public class Constant extends PascalSyntax {
         constant.prettyPrint();
     }
 
-    public static Constant parse(Scanner s) {
+    public static Constant parse(Scanner scanner) {
         enterParser("constant");
-        Constant c = new Constant(s.curLineNum());
-        if (s.curToken.kind == TokenKind.subtractToken || s.curToken.kind == TokenKind.addToken) {
-            c.prefix = PrefixOperator.parse(s);
+        Constant constant = new Constant(scanner.curLineNum());
+        if (scanner.curToken.kind == TokenKind.subtractToken || scanner.curToken.kind == TokenKind.addToken) {
+            constant.prefix = PrefixOperator.parse(scanner);
         }
-        c.constant = UnsignedConstant.parse(s);
+        constant.constant = UnsignedConstant.parse(scanner);
         leaveParser("constant");
-        return c;
+        return constant;
     }
 }

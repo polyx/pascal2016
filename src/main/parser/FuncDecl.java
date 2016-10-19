@@ -32,25 +32,25 @@ public class FuncDecl extends ProcDecl {
         Main.log.prettyPrintLn(";");
     }
 
-    public static FuncDecl parse(Scanner s) {
+    public static FuncDecl parse(Scanner scanner) {
         enterParser("func decl");
 
-        FuncDecl fd = new FuncDecl(s.nextToken.id, s.curLineNum());
+        FuncDecl funcDecl = new FuncDecl(scanner.nextToken.id, scanner.curLineNum());
 
-        s.skip(functionToken);
-        s.skip(nameToken);
+        scanner.skip(functionToken);
+        scanner.skip(nameToken);
 
-        if (s.curToken.kind == leftParToken) {
-            fd.paramList = ParamDeclList.parse(s);
+        if (scanner.curToken.kind == leftParToken) {
+            funcDecl.paramList = ParamDeclList.parse(scanner);
         }
 
-        s.skip(colonToken);
-        fd.funcTypeName = TypeName.parse(s);
-        s.skip(semicolonToken);
-        fd.funcBody = Block.parse(s);
-        s.skip(semicolonToken);
+        scanner.skip(colonToken);
+        funcDecl.funcTypeName = TypeName.parse(scanner);
+        scanner.skip(semicolonToken);
+        funcDecl.funcBody = Block.parse(scanner);
+        scanner.skip(semicolonToken);
 
         leaveParser("func decl");
-        return fd;
+        return funcDecl;
     }
 }

@@ -21,14 +21,14 @@ public class ConstDecl extends PascalDecl {
         Main.log.prettyPrint("; ");
     }
 
-    static ConstDecl parse(Scanner s) {
+    static ConstDecl parse(Scanner scanner) {
         enterParser("const decl");
 
-        ConstDecl constDecl = new ConstDecl(s.curToken.id, s.curLineNum());
-        s.skip(nameToken);
-        s.skip(equalToken);
-        constDecl.constant = Constant.parse(s);
-        s.skip(semicolonToken);
+        ConstDecl constDecl = new ConstDecl(scanner.curToken.id, scanner.curLineNum());
+        scanner.skip(nameToken);
+        scanner.skip(equalToken);
+        constDecl.constant = Constant.parse(scanner);
+        scanner.skip(semicolonToken);
 
         leaveParser("const decl");
         return constDecl;

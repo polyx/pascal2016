@@ -18,24 +18,26 @@ public class Variable extends Factor {
 
     @Override public void prettyPrint() {
         Main.log.prettyPrint(name);
-        if(expr != null) {
-            Main.log.prettyPrint("[");
-            expr.prettyPrint();
-            Main.log.prettyPrint("]");
+
+        if (expr == null) {
+            return;
         }
+        Main.log.prettyPrint("[");
+        expr.prettyPrint();
+        Main.log.prettyPrint("]");
     }
 
-    static Variable parse(Scanner s) {
+    static Variable parse(Scanner scanner) {
         enterParser("variable");
 
-        Variable var = new Variable(s.curLineNum());
-        var.name = s.curToken.id;
-        s.skip(nameToken);
+        Variable var = new Variable(scanner.curLineNum());
+        var.name = scanner.curToken.id;
+        scanner.skip(nameToken);
         //check if array reference
-        if(s.curToken.kind == leftBracketToken) {
-            s.skip(leftBracketToken);
-            var.expr = Expression.parse(s);
-            s.skip(rightBracketToken);
+        if(scanner.curToken.kind == leftBracketToken) {
+            scanner.skip(leftBracketToken);
+            var.expr = Expression.parse(scanner);
+            scanner.skip(rightBracketToken);
         }
 
         leaveParser("variable");

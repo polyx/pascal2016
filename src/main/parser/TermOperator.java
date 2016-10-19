@@ -20,27 +20,21 @@ public class TermOperator extends Operator {
 
     @Override
     public void prettyPrint() {
-        if (name.equals("or"))
-            Main.log.prettyPrint(" " + name + " ");
-        else
-            Main.log.prettyPrint(name);
+        Main.log.prettyPrint(" " + name + " ");
     }
 
-    static TermOperator parse(Scanner s) {
+    static TermOperator parse(Scanner scanner) {
         enterParser("term opr");
-        TermOperator operator = new TermOperator(s.curLineNum());
+        TermOperator operator = new TermOperator(scanner.curLineNum());
 
-        operator.name = s.curToken.kind.toString();
-        switch (s.curToken.kind) {
-            case addToken:
-                s.skip(addToken);
-                break;
-            case subtractToken:
-                s.skip(subtractToken);
-                break;
-            case orToken:
-                s.skip(orToken);
-                break;
+        operator.name = scanner.curToken.kind.toString();
+
+        if (scanner.curToken.kind == addToken) {
+            scanner.skip(addToken);
+        } else if (scanner.curToken.kind == subtractToken) {
+            scanner.skip(subtractToken);
+        } else if (scanner.curToken.kind == orToken) {
+            scanner.skip(orToken);
         }
 
         leaveParser("term opr");
