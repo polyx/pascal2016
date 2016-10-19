@@ -1,7 +1,7 @@
 apply plugin: "java"
 apply plugin: 'application'
 
-mainClassName = 'com.something.MyMainClass'
+mainClassName = 'main.Main'
 
 sourceSets {
     main.java.srcDir "src/main"
@@ -24,14 +24,8 @@ dependencies {
 }
 
 jar {
-    manifest.attributes "Main-Class": "main.Main"
+    manifest.attributes "Main-Class": mainClassName
 }
-
-clean {
-    delete fileTree(dir: "${rootDir}" , include: '*.pas')
-    delete fileTree(dir: "${rootDir}" , include: '*.log')
-}
-
 
 Task taskSourceZip = project.task("makeSourceZip", type:Zip){
     baseName = "pascal2016"
