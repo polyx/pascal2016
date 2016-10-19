@@ -25,7 +25,7 @@ public class RelOperator extends Operator {
     }
 
     static RelOperator parse(Scanner s) {
-        enterParser("rel-operator");
+        enterParser("rel opr");
         RelOperator ro = new RelOperator(s.curLineNum());
 
         ro.token = s.curToken.kind.toString();
@@ -50,7 +50,7 @@ public class RelOperator extends Operator {
                 break;
         }
 
-        leaveParser("rel-operator");
+        leaveParser("rel opr");
         return ro;
     }
 }

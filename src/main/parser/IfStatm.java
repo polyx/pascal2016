@@ -18,22 +18,25 @@ public class IfStatm extends Statement {
     }
 
     @Override public void prettyPrint() {
-        Main.log.prettyPrintLn(" ");
+        //Main.log.prettyPrintLn();
         Main.log.prettyPrint("if ");
         condition.prettyPrint();
-        Main.log.prettyPrintLn(" then ");
+        Main.log.prettyPrint(" then ");
+        Main.log.prettyPrintLn();
+        Main.log.prettyIndent();
         statement.prettyPrint();
+        Main.log.prettyOutdent();
         if(elseStatm != null) {
             Main.log.prettyPrintLn(" ");
-            Main.log.prettyOutdent();
             Main.log.prettyPrintLn("else");
+            Main.log.prettyIndent();
             elseStatm.prettyPrint();
+            Main.log.prettyOutdent();
         }
-        Main.log.prettyOutdent();
     }
 
     static IfStatm parse(Scanner s) {
-        enterParser("if-statement");
+        enterParser("if-statm");
         IfStatm ifStatm = new IfStatm(s.curLineNum());
         s.skip(ifToken);
         ifStatm.condition = Expression.parse(s);
@@ -45,7 +48,7 @@ public class IfStatm extends Statement {
             ifStatm.elseStatm = Statement.parse(s);
         }
 
-        leaveParser("if-statement");
+        leaveParser("if-statm");
         return ifStatm;
     }
 }

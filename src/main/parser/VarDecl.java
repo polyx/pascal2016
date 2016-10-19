@@ -5,9 +5,6 @@ import scanner.Scanner;
 
 import static scanner.TokenKind.*;
 
-/**
- * Created by filos on 15/10/2016.
- */
 public class VarDecl extends PascalDecl{
     Type type;
     VarDecl(String id, int lNum) {
@@ -18,6 +15,7 @@ public class VarDecl extends PascalDecl{
     void prettyPrint() {
         Main.log.prettyPrint(name + ": ");
         type.prettyPrint();
+        Main.log.prettyPrint(";");
     }
 
     @Override
@@ -46,13 +44,13 @@ public class VarDecl extends PascalDecl{
     }
 
     static public VarDecl parse(Scanner scanner){
-        enterParser("var-decl");
-        VarDecl varDecl = new VarDecl(scanner.nextToken.id, scanner.curLineNum());
+        enterParser("var decl");
+        VarDecl varDecl = new VarDecl(scanner.curToken.id, scanner.curLineNum());
         scanner.skip(nameToken);
         scanner.skip(colonToken);
         varDecl.type = Type.parse(scanner);
         scanner.skip(semicolonToken);
-        leaveParser("var-decl");
+        leaveParser("var decl");
         return varDecl;
     }
 }

@@ -7,9 +7,6 @@ import java.util.ArrayList;
 
 import static scanner.TokenKind.*;
 
-/**
- * Created by filos on 15/10/2016.
- */
 public class StatmList extends PascalSyntax {
     ArrayList<Statement> statmList = new ArrayList<>();
 

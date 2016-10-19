@@ -8,10 +8,11 @@ import scanner.Scanner;
 import static scanner.TokenKind.*;
 
 public class VarDeclPart extends PascalSyntax {
-    ArrayList<VarDecl> varList = new ArrayList<>();
+    ArrayList<VarDecl> varList;
 
     VarDeclPart(int lNum) {
         super(lNum);
+        varList = new ArrayList<>();
     }
 
     @Override
@@ -22,28 +23,20 @@ public class VarDeclPart extends PascalSyntax {
     @Override
     public void prettyPrint() {
         Main.log.prettyPrint("var ");
-        int counter = 0;
 
-        if (varList.size() > 1) {
-            Main.log.prettyIndent();
-            Main.log.prettyPrintLn(" ");
-            System.out.println("");
-        }
+        Main.log.prettyIndent();
+        Main.log.prettyPrintLn();
+
         for (VarDecl v : varList) {
             v.prettyPrint();
-            counter++;
-            if (counter == 5) {
-                counter = 0;
-                Main.log.prettyPrintLn(" ");
-            }
+            Main.log.prettyPrintLn();
         }
 
-        if (varList.size() > 1)
-            Main.log.prettyOutdent();
+        Main.log.prettyOutdent();
     }
 
     public static VarDeclPart parse(Scanner s) {
-        enterParser("var-decl-part");
+        enterParser("var decl part");
 
         VarDeclPart varDeclPart = new VarDeclPart(s.curLineNum());
         s.skip(varToken);
@@ -52,7 +45,7 @@ public class VarDeclPart extends PascalSyntax {
             varDeclPart.varList.add(VarDecl.parse(s));
         }
 
-        leaveParser("var-decl-part");
+        leaveParser("var decl part");
         return varDeclPart;
     }
 }

@@ -25,7 +25,7 @@ public class FuncDecl extends ProcDecl {
         if (paramList != null)
             paramList.prettyPrint();
 
-        Main.log.prettyPrint(";");
+        Main.log.prettyPrint(": ");
         funcTypeName.prettyPrint();
         Main.log.prettyPrintLn(";");
         funcBody.prettyPrint();
@@ -33,9 +33,9 @@ public class FuncDecl extends ProcDecl {
     }
 
     public static FuncDecl parse(Scanner s) {
-        enterParser("func-decl");
+        enterParser("func decl");
 
-        FuncDecl fd = new FuncDecl(s.curToken.id, s.curLineNum());
+        FuncDecl fd = new FuncDecl(s.nextToken.id, s.curLineNum());
 
         s.skip(functionToken);
         s.skip(nameToken);
@@ -50,7 +50,7 @@ public class FuncDecl extends ProcDecl {
         fd.funcBody = Block.parse(s);
         s.skip(semicolonToken);
 
-        leaveParser("func-decl");
+        leaveParser("func decl");
         return fd;
     }
 }

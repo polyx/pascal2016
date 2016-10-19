@@ -21,11 +21,11 @@ public class TypeName extends Type {
     }
 
     public static TypeName parse(Scanner scanner){
-        enterParser("type-name");
+        enterParser("type name");
         TypeName typeName = new TypeName(scanner.curLineNum());
         typeName.name = scanner.curToken.id;
         scanner.skip(nameToken);
-        leaveParser("type-name");
+        leaveParser("type name");
         return typeName;
     }
 }

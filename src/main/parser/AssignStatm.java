@@ -27,7 +27,7 @@ public class AssignStatm extends Statement {
     }
 
     static AssignStatm parse(Scanner s) {
-        enterParser("assign-statement");
+        enterParser("assign statm");
 
         AssignStatm as = new AssignStatm(s.curLineNum());
 
@@ -35,7 +35,7 @@ public class AssignStatm extends Statement {
         s.skip(assignToken);
         as.expr = Expression.parse(s);
 
-        leaveParser("assign-statement");
+        leaveParser("assign statm");
         return as;
     }
 }

@@ -21,22 +21,24 @@ public class ProcDecl extends PascalDecl {
 
     @Override
     public void prettyPrint() {
-        Main.log.prettyPrint("procedure " + name + "");
+        Main.log.prettyPrint("procedure " + name + " ");
 
         if (paramList != null) {
             paramList.prettyPrint();
         }
 
         Main.log.prettyPrint(";");
-        Main.log.prettyPrintLn(" ");
+        //Main.log.prettyPrintLn(" ");
+        Main.log.prettyIndent();
         procBody.prettyPrint();
-        Main.log.prettyPrint(";");
+        Main.log.prettyOutdent();
+        Main.log.prettyPrintLn(";");
     }
 
     static ProcDecl parse(Scanner s) {
-        enterParser("proc-decl");
+        enterParser("proc decl");
 
-        ProcDecl procedure = new ProcDecl(s.curToken.id, s.curLineNum());
+        ProcDecl procedure = new ProcDecl(s.nextToken.id, s.curLineNum());
 
         s.skip(procedureToken);
         s.skip(nameToken);
@@ -50,7 +52,7 @@ public class ProcDecl extends PascalDecl {
         procedure.procBody = Block.parse(s);
         s.skip(semicolonToken);
 
-        leaveParser("proc-decl");
+        leaveParser("proc decl");
         return procedure;
     }
 

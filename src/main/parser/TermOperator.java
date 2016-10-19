@@ -27,7 +27,7 @@ public class TermOperator extends Operator {
     }
 
     static TermOperator parse(Scanner s) {
-        enterParser("term-operator");
+        enterParser("term opr");
         TermOperator operator = new TermOperator(s.curLineNum());
 
         operator.name = s.curToken.kind.toString();
@@ -43,7 +43,7 @@ public class TermOperator extends Operator {
                 break;
         }
 
-        leaveParser("term-operator");
+        leaveParser("term opr");
         return operator;
     }
 }

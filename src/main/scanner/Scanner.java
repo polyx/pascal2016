@@ -133,7 +133,7 @@ public class Scanner {
         Token newToken = null;
         for (TokenKind tk : TokenKind.values()) {
             // if line starts with predefined token that is not a constant or a name
-            if (sourceLine.startsWith(tk.toString()) && tk.isReservedToken()) {
+            if (sourceLine.startsWith(tk.toString()) && tk.isReservedToken() && !tk.isLiteralTok()) {
                 if (tk == TokenKind.eofToken) {
                     return new Token(TokenKind.eofToken);
                 } else {

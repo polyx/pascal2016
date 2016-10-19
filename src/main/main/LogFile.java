@@ -130,7 +130,7 @@ public class LogFile {
 	String logLine = "Parser:   ";
 	for (int i = 1;  i <= parseLevel;  ++i) logLine += "  ";
 		writeLogLine(logLine + "<" + name + ">");
-		System.out.println(logLine + "<" + name + ">");
+		//System.out.println(logLine + "<" + name + ">");
 	}
 
 
@@ -147,6 +147,7 @@ public class LogFile {
     }
 
     public void prettyPrintLn() {
+		System.out.println(prettyLine);
 	writeLogLine(prettyLine);
 	prettyLine = "";
     }

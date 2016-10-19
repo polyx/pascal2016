@@ -23,13 +23,13 @@ public class NumberLiteral extends UnsignedConstant {
     }
 
     public static NumberLiteral parse(Scanner scanner) {
-        enterParser("numeric-literal");
+        enterParser("number literal");
 
         NumberLiteral number = new NumberLiteral(scanner.curLineNum());
         number.value = scanner.curToken.intVal;
         scanner.skip(intValToken);
 
-        leaveParser("numeric-literal");
+        leaveParser("number literal");
         return number;
     }
 }

@@ -14,14 +14,14 @@ public class Block extends PascalSyntax {
     VarDeclPart varDeclPart;
     StatmList statmList;
 
-    HashMap<String, FuncDecl> funcDecls;
-    HashMap<String, ProcDecl> procDecls;
+    ArrayList<FuncDecl> funcDecls;
+    ArrayList<ProcDecl> procDecls;
 
 
     Block(int lNum) {
         super(lNum);
-        funcDecls = new HashMap<>();
-        procDecls = new HashMap<>();
+        funcDecls = new ArrayList<>();
+        procDecls = new ArrayList<>();
     }
 
     @Override
@@ -40,21 +40,23 @@ public class Block extends PascalSyntax {
             varDeclPart.prettyPrint();
             Main.log.prettyPrintLn("");
         }
+
         // neither const or var decls parts exist so just put an empty line
         if (constDeclPart == null && varDeclPart == null)
             Main.log.prettyPrintLn("");
 
         //print func decls
         if (procDecls.size() > 0) {
-            procDecls.values().forEach(ProcDecl::prettyPrint);
+            procDecls.forEach(ProcDecl::prettyPrint);
         }
 
         //print proc decls
         if (funcDecls.size() > 0) {
-            funcDecls.values().forEach(FuncDecl::prettyPrint);
+            funcDecls.forEach(FuncDecl::prettyPrint);
         }
 
 
+        //Main.log.prettyPrintLn();
         Main.log.prettyPrintLn("begin");
         Main.log.prettyIndent();
         statmList.prettyPrint();
@@ -67,21 +69,21 @@ public class Block extends PascalSyntax {
 
         Block block = new Block(scanner.curLineNum());
 
-        if (scanner.curToken.kind == constToken) {
+       if (scanner.curToken.kind == constToken) {
             block.constDeclPart = ConstDeclPart.parse(scanner);
         }
         if (scanner.curToken.kind == varToken) {
             block.varDeclPart = VarDeclPart.parse(scanner);
         }
 
-        while (scanner.nextToken.kind == functionToken || scanner.nextToken.kind == procedureToken) {
-            if (scanner.nextToken.kind == functionToken) {
+        while (scanner.curToken.kind == functionToken || scanner.curToken.kind == procedureToken) {
+            if (scanner.curToken.kind == functionToken) {
                 FuncDecl fd = FuncDecl.parse(scanner);
-                block.funcDecls.put(fd.name, fd);
+                block.funcDecls.add(fd);
 
-            } else if (scanner.nextToken.kind == procedureToken) {
+            } else if (scanner.curToken.kind == procedureToken) {
                 ProcDecl pd = ProcDecl.parse(scanner);
-                block.procDecls.put(pd.name, pd);
+                block.procDecls.add(pd);
 
             }
         }

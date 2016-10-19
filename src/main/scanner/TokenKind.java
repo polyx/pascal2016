@@ -113,4 +113,8 @@ public enum TokenKind {
     public boolean isTermOpr() {
 	return isPrefixOpr() || this==orToken;
     }
+
+    public boolean isLiteralTok() {
+        return this==charValToken || this==intValToken || this==nameToken;
+    }
 }

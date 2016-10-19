@@ -16,25 +16,26 @@ public class CompoundStatm extends Statement {
     }
 
     @Override public void prettyPrint() {
-        Main.log.prettyPrintLn("");
+        Main.log.prettyPrintLn();
             Main.log.prettyIndent();
                 Main.log.prettyPrintLn("begin");
                 Main.log.prettyIndent();
                 sl.prettyPrint();
                 Main.log.prettyOutdent();
-            Main.log.prettyPrintLn("end;");
+            Main.log.prettyPrint("end");
         Main.log.prettyOutdent();
+
     }
 
     static CompoundStatm parse(Scanner s) {
-        enterParser("coumpound-statm");
+        enterParser("compound statm");
         CompoundStatm cp = new CompoundStatm(s.curLineNum());
 
         s.skip(beginToken);
         cp.sl = StatmList.parse(s);
         s.skip(endToken);
 
-        leaveParser("coumpound-statm");
+        leaveParser("compound statm");
         return cp;
     }
 }

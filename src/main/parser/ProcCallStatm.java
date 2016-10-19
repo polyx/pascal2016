@@ -7,9 +7,7 @@ import java.util.ArrayList;
 
 import static scanner.TokenKind.*;
 
-/**
- * Created by filos on 15/10/2016.
- */
+
 public class ProcCallStatm extends Statement {
     String funcName;
     ArrayList<Expression> params = new ArrayList<>();
@@ -47,7 +45,7 @@ public class ProcCallStatm extends Statement {
     }
 
     static ProcCallStatm parse(Scanner s) {
-        enterParser("proc-call");
+        enterParser("proc call");
 
         ProcCallStatm pc = new ProcCallStatm(s.curLineNum());
         pc.funcName = s.curToken.id;
