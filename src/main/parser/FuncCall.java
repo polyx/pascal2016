@@ -24,15 +24,19 @@ public class FuncCall extends Factor {
     @Override
     public void prettyPrint() {
         Main.log.prettyPrint(name);
-        Main.log.prettyPrint("(");
+        int counter = exprList.size();
         if (exprList.size() > 0){ // log params if any otherwise will just print "() "
+            Main.log.prettyPrint("(");
             for (Expression e : exprList) {
                 e.prettyPrint();
+                //dont put comma after last arg :)
+                if (--counter == 0) {
+                    break;
+                }
                 Main.log.prettyPrint(", ");
             }
+            Main.log.prettyPrint(")");
         }
-        Main.log.prettyPrint(")");
-
     }
 
     public static FuncCall parse(Scanner s) {

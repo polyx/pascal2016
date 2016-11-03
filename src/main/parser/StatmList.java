@@ -16,8 +16,12 @@ public class StatmList extends PascalSyntax {
 
     @Override
     void prettyPrint() {
+        int counter = statmList.size();
         for (Statement statm : statmList) {
             statm.prettyPrint();
+            if (--counter != 0) {
+                Main.log.prettyPrint(";");
+            }
             Main.log.prettyPrintLn();
         }
     }

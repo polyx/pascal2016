@@ -36,12 +36,8 @@ public class ProcCallStatm extends Statement {
                 }
                 Main.log.prettyPrint(", ");
             }
-            Main.log.prettyPrint(");");
-        } else {
-            Main.log.prettyPrint("( );");
+            Main.log.prettyPrint(")");
         }
-        /*Main.log.prettyIndent();
-        Main.log.prettyOutdent();*/
     }
 
     static ProcCallStatm parse(Scanner s) {

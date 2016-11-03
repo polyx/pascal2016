@@ -24,12 +24,12 @@ public class SimpleExpr extends PascalSyntax {
     public void prettyPrint() {
         if (prefixOper != null) prefixOper.prettyPrint();
         termList.get(0).prettyPrint();
-        if (termOper != null) {
+        //if (termOper != null) {
             for (int i = 0; i < termOperList.size(); i++) {
                 termOperList.get(i).prettyPrint();
                 termList.get(i + 1).prettyPrint();
             }
-        }
+        //}
     }
 
     static SimpleExpr parse(Scanner s) {

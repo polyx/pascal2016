@@ -40,6 +40,6 @@ public class ArrayType extends Type {
         arrType.type = Type.parse(scanner);
 
         leaveParser("array-type");
-        return new ArrayType(scanner.curLineNum());
+        return arrType;
     }
 }
