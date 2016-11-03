@@ -25,7 +25,7 @@ public class FuncCall extends Factor {
     public void prettyPrint() {
         Main.log.prettyPrint(name);
         int counter = exprList.size();
-        if (exprList.size() > 0){ // log params if any otherwise will just print "() "
+        if (exprList.size() > 0){
             Main.log.prettyPrint("(");
             for (Expression e : exprList) {
                 e.prettyPrint();
