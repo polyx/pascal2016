@@ -27,14 +27,14 @@ class Expression extends PascalSyntax {
         }
     }
 
-    static Expression parse(Scanner s) {
+    static Expression parse(Scanner scanner) {
         enterParser("expression");
 
-        Expression expr = new Expression(s.curLineNum());
-        expr.simpleExpr = SimpleExpr.parse(s);
-        if (s.curToken.kind.isRelOpr()) {
-            expr.relOperator = RelOperator.parse(s);
-            expr.simpleExpr2 = SimpleExpr.parse(s);
+        Expression expr = new Expression(scanner.curLineNum());
+        expr.simpleExpr = SimpleExpr.parse(scanner);
+        if (scanner.curToken.kind.isRelOpr()) {
+            expr.relOperator = RelOperator.parse(scanner);
+            expr.simpleExpr2 = SimpleExpr.parse(scanner);
         }
 
         leaveParser("expression");

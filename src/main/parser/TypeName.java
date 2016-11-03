@@ -17,14 +17,17 @@ public class TypeName extends Type {
 
     @Override
     public String identify() {
-        return null;
+        return "<type " +  name + "> on line" + lineNum;
     }
 
     public static TypeName parse(Scanner scanner){
         enterParser("type name");
+
         TypeName typeName = new TypeName(scanner.curLineNum());
         typeName.name = scanner.curToken.id;
+
         scanner.skip(nameToken);
+
         leaveParser("type name");
         return typeName;
     }

@@ -24,13 +24,13 @@ public class InnerExpr extends Factor {
         Main.log.prettyPrint(")");
     }
 
-    static InnerExpr parse(Scanner s) {
+    static InnerExpr parse(Scanner scanner) {
         enterParser("inner expr");
-        InnerExpr innerExpr= new InnerExpr(s.curLineNum());
+        InnerExpr innerExpr= new InnerExpr(scanner.curLineNum());
 
-        s.skip(leftParToken);
-        innerExpr.expr = Expression.parse(s);
-        s.skip(rightParToken);
+        scanner.skip(leftParToken);
+        innerExpr.expr = Expression.parse(scanner);
+        scanner.skip(rightParToken);
 
         leaveParser("inner expr");
         return innerExpr;

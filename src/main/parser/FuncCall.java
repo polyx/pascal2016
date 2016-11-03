@@ -39,24 +39,24 @@ public class FuncCall extends Factor {
         }
     }
 
-    public static FuncCall parse(Scanner s) {
+    public static FuncCall parse(Scanner scanner) {
         enterParser("func call");
-        FuncCall func = new FuncCall(s.curLineNum());
+        FuncCall func = new FuncCall(scanner.curLineNum());
 
-        func.name = s.curToken.id;
-        s.skip(nameToken);
+        func.name = scanner.curToken.id;
+        scanner.skip(nameToken);
 
-        if (s.curToken.kind == leftParToken) {
-            s.skip(leftParToken);
-//            func.condition = Expression.parse(s);
-            func.exprList.add(Expression.parse(s));
-
-            while (s.curToken.kind == commaToken) {
-                s.skip(commaToken);
-//                func.condition = Expression.parse(s);
-                func.exprList.add(Expression.parse(s));
+        if (scanner.curToken.kind == leftParToken) {
+            scanner.skip(leftParToken);
+            func.exprList.add(Expression.parse(scanner));
+            while (true) {
+                if (!(scanner.curToken.kind == commaToken)) {
+                    break;
+                }
+                scanner.skip(commaToken);
+                func.exprList.add(Expression.parse(scanner));
             }
-            s.skip(rightParToken);
+            scanner.skip(rightParToken);
         }
 
         leaveParser("func call");

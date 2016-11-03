@@ -2,6 +2,7 @@ package parser;
 
 import main.Main;
 import scanner.Scanner;
+
 import static scanner.TokenKind.*;
 
 public class FactorOperator extends Operator {
@@ -11,27 +12,29 @@ public class FactorOperator extends Operator {
         super(lNum);
     }
 
-    @Override public String identify() {
+    @Override
+    public String identify() {
         return "<Factor Operator " + id + "> on line " + lineNum;
     }
 
-    @Override public void prettyPrint() {
-        if(id.equals("*"))
-            Main.log.prettyPrint(id);
-        else
-            Main.log.prettyPrint(" " + id + " ");
+    @Override
+    public void prettyPrint() {
+        Main.log.prettyPrint(" " + id + " ");
     }
 
-    static FactorOperator parse(Scanner s) {
+    static FactorOperator parse(Scanner scanner) {
         enterParser("factor opr");
-        FactorOperator operator = new FactorOperator(s.curLineNum());
+        FactorOperator operator = new FactorOperator(scanner.curLineNum());
 
-        operator.id = s.curToken.kind.toString();
-        switch(s.curToken.kind) {
-            case multiplyToken: s.skip(multiplyToken); 	break;
-            case divToken: s.skip(divToken);			break;
-            case modToken: s.skip(modToken);			break;
-            case andToken: s.skip(andToken);			break;
+        operator.id = scanner.curToken.kind.toString();
+        if (scanner.curToken.kind == multiplyToken) {
+            scanner.skip(multiplyToken);
+        } else if (scanner.curToken.kind == divToken) {
+            scanner.skip(divToken);
+        } else if (scanner.curToken.kind == modToken) {
+            scanner.skip(modToken);
+        } else if (scanner.curToken.kind == andToken) {
+            scanner.skip(andToken);
         }
 
         leaveParser("factor opr");

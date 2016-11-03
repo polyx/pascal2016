@@ -22,17 +22,15 @@ public class PrefixOperator extends Operator {
         Main.log.prettyPrint(name);
     }
 
-    static PrefixOperator parse(Scanner s) {
+    static PrefixOperator parse(Scanner scanner) {
         enterParser("prefix-operator");
-        PrefixOperator operator = new PrefixOperator(s.curLineNum());
+        PrefixOperator operator = new PrefixOperator(scanner.curLineNum());
 
-        operator.name = s.curToken.kind.toString();
-        if (s.curToken.kind == TokenKind.subtractToken) {
-            s.skip(subtractToken);
-
-        } else if (s.curToken.kind == TokenKind.addToken) {
-            s.skip(addToken);
-
+        operator.name = scanner.curToken.kind.toString();
+        if (scanner.curToken.kind == TokenKind.subtractToken) {
+            scanner.skip(subtractToken);
+        } else if (scanner.curToken.kind == TokenKind.addToken) {
+            scanner.skip(addToken);
         }
 
         leaveParser("prefix-operator");

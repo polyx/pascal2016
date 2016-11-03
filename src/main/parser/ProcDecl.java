@@ -28,29 +28,28 @@ public class ProcDecl extends PascalDecl {
         }
 
         Main.log.prettyPrint(";");
-        //Main.log.prettyPrintLn(" ");
         Main.log.prettyIndent();
         procBody.prettyPrint();
         Main.log.prettyOutdent();
         Main.log.prettyPrintLn(";");
     }
 
-    static ProcDecl parse(Scanner s) {
+    static ProcDecl parse(Scanner scanner) {
         enterParser("proc decl");
 
-        ProcDecl procedure = new ProcDecl(s.nextToken.id, s.curLineNum());
+        ProcDecl procedure = new ProcDecl(scanner.nextToken.id, scanner.curLineNum());
 
-        s.skip(procedureToken);
-        s.skip(nameToken);
+        scanner.skip(procedureToken);
+        scanner.skip(nameToken);
 
         //parse params if any
-        if (s.curToken.kind == leftParToken) {
-            procedure.paramList = ParamDeclList.parse(s);
+        if (scanner.curToken.kind == leftParToken) {
+            procedure.paramList = ParamDeclList.parse(scanner);
         }
 
-        s.skip(semicolonToken);
-        procedure.procBody = Block.parse(s);
-        s.skip(semicolonToken);
+        scanner.skip(semicolonToken);
+        procedure.procBody = Block.parse(scanner);
+        scanner.skip(semicolonToken);
 
         leaveParser("proc decl");
         return procedure;

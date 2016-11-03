@@ -5,10 +5,8 @@ import java.util.ArrayList;
 import scanner.Scanner;
 
 public class Term extends PascalSyntax {
-    Factor factor;
-    FactorOperator factorOperator;
     ArrayList<Factor> factorList = new ArrayList<>();
-    ArrayList<FactorOperator> faopList = new ArrayList<>();
+    ArrayList<FactorOperator> factorOperators = new ArrayList<>();
 
     Term(int lNum) {
         super(lNum);
@@ -22,28 +20,25 @@ public class Term extends PascalSyntax {
     @Override
     public void prettyPrint() {
         factorList.get(0).prettyPrint();
-        if (factorOperator != null) {
-            for (int i = 0; i < faopList.size(); i++) {
-                faopList.get(i).prettyPrint();
-                factorList.get(i + 1).prettyPrint();
+        if (factorOperators.size() > 0) {
+            for (int i = 0; i < factorOperators.size(); i++) {
+                factorOperators.get(i).prettyPrint();
+                factorList.get(i + 1).prettyPrint(); // factors are 1 ahead of operators
             }
         }
     }
 
-    static Term parse(Scanner s) {
+    static Term parse(Scanner scanner) {
         enterParser("term");
-        Term t = new Term(s.curLineNum());
+        Term term = new Term(scanner.curLineNum());
 
-        t.factor = Factor.parse(s);
-        t.factorList.add(t.factor);
-        while (s.curToken.kind.isFactorOpr()) {
-            t.factorOperator = FactorOperator.parse(s);
-            t.faopList.add(t.factorOperator);
-            t.factor = Factor.parse(s);
-            t.factorList.add(t.factor);
+        term.factorList.add(Factor.parse(scanner));
+        while (scanner.curToken.kind.isFactorOpr()) {
+            term.factorOperators.add(FactorOperator.parse(scanner));
+            term.factorList.add(Factor.parse(scanner));
         }
 
         leaveParser("term");
-        return t;
+        return term;
     }
 }

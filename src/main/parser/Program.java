@@ -26,16 +26,16 @@ public class Program extends PascalDecl {
         Main.log.prettyPrint(".");
     }
 
-    public static Program parse(Scanner s) {
+    public static Program parse(Scanner scanner) {
         enterParser("program");
 
-        s.skip(programToken);
-        Program p = new Program(s.nextToken.id, s.curLineNum());
-        p.pname = s.curToken.id;
-        s.skip(nameToken);
-        s.skip(semicolonToken);
-        p.pb = Block.parse(s);
-        s.skip(dotToken);
+        scanner.skip(programToken);
+        Program p = new Program(scanner.nextToken.id, scanner.curLineNum());
+        p.pname = scanner.curToken.id;
+        scanner.skip(nameToken);
+        scanner.skip(semicolonToken);
+        p.pb = Block.parse(scanner);
+        scanner.skip(dotToken);
 
         leaveParser("program");
         return p;

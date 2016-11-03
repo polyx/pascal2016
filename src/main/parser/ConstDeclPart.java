@@ -24,13 +24,13 @@ public class ConstDeclPart extends PascalSyntax {
         Main.log.prettyOutdent();
     }
 
-    public static ConstDeclPart parse(Scanner s) {
+    public static ConstDeclPart parse(Scanner scanner) {
         enterParser("const decl part");
 
-        s.skip(constToken);
-        ConstDeclPart constDeclPart = new ConstDeclPart(s.curLineNum());
-        while(s.curToken.kind == nameToken) {
-            constDeclPart.constList.add(ConstDecl.parse(s));
+        scanner.skip(constToken);
+        ConstDeclPart constDeclPart = new ConstDeclPart(scanner.curLineNum());
+        while(scanner.curToken.kind == nameToken) {
+            constDeclPart.constList.add(ConstDecl.parse(scanner));
         }
 
         leaveParser("const decl part");
