@@ -2,6 +2,7 @@ package parser;
 
 import java.util.ArrayList;
 
+import com.sun.deploy.util.StringUtils;
 import main.Main;
 import scanner.Scanner;
 
@@ -23,14 +24,15 @@ public class VarDeclPart extends PascalSyntax {
     @Override
     public void prettyPrint() {
         Main.log.prettyPrint("var ");
-
         Main.log.prettyIndent();
         Main.log.prettyPrintLn();
-
-        varList.forEach(varDecl -> {
+        int counter = varList.size();
+        for (VarDecl varDecl:varList){
             varDecl.prettyPrint();
-            Main.log.prettyPrintLn();
-        });
+            if (--counter != 0){
+                Main.log.prettyPrintLn();
+            }
+        }
 
         Main.log.prettyOutdent();
     }

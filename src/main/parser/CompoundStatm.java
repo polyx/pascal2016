@@ -16,7 +16,6 @@ public class CompoundStatm extends Statement {
     }
 
     @Override public void prettyPrint() {
-        Main.log.prettyPrintLn();
             Main.log.prettyIndent();
                 Main.log.prettyPrintLn("begin");
                 Main.log.prettyIndent();
@@ -24,8 +23,6 @@ public class CompoundStatm extends Statement {
                 Main.log.prettyOutdent();
             Main.log.prettyPrint("end");
         Main.log.prettyOutdent();
-        Main.log.prettyPrintLn("");
-
     }
 
     static CompoundStatm parse(Scanner scanner) {

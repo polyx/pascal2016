@@ -33,17 +33,11 @@ public class Block extends PascalSyntax {
     public void prettyPrint() {
         if (constDeclPart != null) {
             constDeclPart.prettyPrint();
-            Main.log.prettyPrintLn("");
         }
 
         if (varDeclPart != null) {
             varDeclPart.prettyPrint();
-            Main.log.prettyPrintLn("");
         }
-
-        // neither const or var decls parts exist so just put an empty line
-        if (constDeclPart == null && varDeclPart == null)
-            Main.log.prettyPrintLn("");
 
         //print func decls
         if (procDecls.size() > 0) {
@@ -56,9 +50,12 @@ public class Block extends PascalSyntax {
             funcDecls.forEach(FuncDecl::prettyPrint);
             Main.log.prettyPrintLn("");
         }
-
-
-        Main.log.prettyPrintLn("begin");
+        if (varDeclPart == null && constDeclPart == null){
+            Main.log.prettyPrintLn("begin");
+        }else{
+            Main.log.prettyPrintLn();
+            Main.log.prettyPrintLn("begin");
+        }
         Main.log.prettyIndent();
         statmList.prettyPrint();
         Main.log.prettyOutdent();

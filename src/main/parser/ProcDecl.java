@@ -21,6 +21,7 @@ public class ProcDecl extends PascalDecl {
 
     @Override
     public void prettyPrint() {
+        Main.log.prettyPrintLn();
         Main.log.prettyPrint("procedure " + name + " ");
 
         if (paramList != null) {
@@ -28,6 +29,7 @@ public class ProcDecl extends PascalDecl {
         }
 
         Main.log.prettyPrint(";");
+        Main.log.prettyPrintLn();
         Main.log.prettyIndent();
         procBody.prettyPrint();
         Main.log.prettyOutdent();
