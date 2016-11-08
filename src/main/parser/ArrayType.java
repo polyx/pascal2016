@@ -13,6 +13,12 @@ public class ArrayType extends Type {
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+        const1.check(curScope, lib);
+        const2.check(curScope, lib);
+    }
+
+    @Override
     void prettyPrint() {
         log.prettyPrint("array[");
         const1.prettyPrint();

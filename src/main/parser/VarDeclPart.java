@@ -16,6 +16,11 @@ public class VarDeclPart extends PascalSyntax {
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+        varList.forEach(varDecl -> varDecl.check(curScope, lib));
+    }
+
+    @Override
     public String identify() {
         return "<var-decl-part> on line " + lineNum;
     }

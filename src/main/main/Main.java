@@ -1,7 +1,7 @@
 package main;
 
-import parser.Program;
-import scanner.Scanner;
+import parser.*;
+import scanner.*;
 
 import static scanner.TokenKind.*;
 
@@ -32,13 +32,13 @@ public class Main {
             Scanner s = new Scanner(sourceFileName);
             if (testScanner) {
                 doTestScanner(s);
-            }
-            else if (testParser) {
+            } else if (testParser) {
                 doTestParser(s);
             }
             // Del 3:
-            // else if (testChecker)
-            //     doTestChecker(s);
+            else if (testChecker) {
+                doTestChecker(s);
+            }
             // Del 4:
             // else
             //     doRunRealCompiler(s);
@@ -105,50 +105,50 @@ public class Main {
 
     private static void doTestParser(Scanner s) {
         Program prog = Program.parse(s);
-        if (s.curToken.kind != eofToken)
+        if (s.curToken.kind != eofToken) {
             error("Scanner error: Garbage after the program!");
-
+        }
         prog.prettyPrint();
     }
 
 
-    /* Del 3:
     private static void doTestChecker(Scanner s) {
-	Program prog = Program.parse(s);
-	if (s.curToken.kind != eofToken)
-	    error("Scanner error: Garbage after the program!");
-	if (log.doLogPrettyPrint)
-	    prog.prettyPrint();
-	
-	library = new Library();
-	prog.check(library, library);
+        Program prog = Program.parse(s);
+        if (s.curToken.kind != eofToken) {
+            error("Scanner error: Garbage after the program!");
+        }
+        if (log.doLogPrettyPrint) {
+            prog.prettyPrint();
+        }
+
+        Library library = new Library();
+        prog.check(library, library);
     }
-    */
 
 
-    /* Del 4:
+    //     Del 4:
     private static void doRunRealCompiler(Scanner s) {
-	System.out.print("Parsing...");
-	Program prog = Program.parse(s);
-	if (s.curToken.kind != eofToken)
-	    error("Scanner error: Garbage after the program!");
-
-	if (log.doLogPrettyPrint)
-	    prog.prettyPrint();
-	
-	System.out.print(" checking...");
-	library = new Library();
-	prog.check(library, library);
-
-	System.out.print(" generating code...");
-	CodeFile code = new CodeFile(baseFileName+".s");
-	library.genCode(code);  prog.genCode(code);
-	code.finish();
-	System.out.println("OK");
-
-	assembleCode();
+//        System.out.print("Parsing...");
+//        Program prog = Program.parse(s);
+//        if (s.curToken.kind != eofToken)
+//            error("Scanner error: Garbage after the program!");
+//
+//        if (log.doLogPrettyPrint)
+//            prog.prettyPrint();
+//
+//        System.out.print(" checking...");
+//        library = new Library();
+//        prog.check(library, library);
+//
+//        System.out.print(" generating code...");
+//        CodeFile code = new CodeFile(baseFileName + ".s");
+//        library.genCode(code);
+//        prog.genCode(code);
+//        code.finish();
+//        System.out.println("OK");
+//
+//        assembleCode();
     }
-    */
 
 
     private static void assembleCode() {

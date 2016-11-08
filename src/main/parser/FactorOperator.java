@@ -13,6 +13,11 @@ public class FactorOperator extends Operator {
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+
+    }
+
+    @Override
     public String identify() {
         return "<Factor Operator " + id + "> on line " + lineNum;
     }

@@ -9,6 +9,11 @@ public class EmptyStatm extends Statement{
         super(n);
     }
 
+    @Override
+    public void check(Block curScope, Library lib) {
+
+    }
+
     public static EmptyStatm parse(Scanner scanner) {
         enterParser("empty statm");
         leaveParser("empty statm");

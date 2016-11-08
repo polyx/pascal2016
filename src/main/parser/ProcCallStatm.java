@@ -40,6 +40,21 @@ public class ProcCallStatm extends Statement {
         }
     }
 
+
+//    void check1(Block curScope, Library lib) {
+//        PascalDecl d = curScope.findDecl(procName, this);
+//        procRef = (ProcDecl) d;
+//    }
+
+    @Override
+    public void check(Block curScope, Library lib) {
+        PascalDecl d = curScope.findDecl(funcName, this);
+        for (Expression param : params) {
+            param.check(curScope, lib);
+        }
+    }
+
+
     static ProcCallStatm parse(Scanner s) {
         enterParser("proc call");
 

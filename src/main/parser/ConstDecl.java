@@ -15,6 +15,11 @@ public class ConstDecl extends PascalDecl {
         return "<ConstDecl> on line " + lineNum;
     }
 
+    @Override
+    public void check(Block curScope, Library lib) {
+        constant.check(curScope, lib);
+    }
+
     @Override void prettyPrint() {
         Main.log.prettyPrint(name + " = ");
         constant.prettyPrint();

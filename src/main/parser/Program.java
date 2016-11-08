@@ -20,6 +20,11 @@ public class Program extends PascalDecl {
     }
 
 
+    @Override
+    public void check(Block curScope, Library lib) {
+        pb.check(curScope, lib);
+    }
+
     public void prettyPrint() {
         Main.log.prettyPrintLn("program " + pname + ";");
         pb.prettyPrint();

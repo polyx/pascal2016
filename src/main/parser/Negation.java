@@ -12,6 +12,11 @@ public class Negation extends Factor {
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+        // nothing to check
+    }
+
+    @Override
     public String identify() {
         return "<Negation> on line " + lineNum;
     }

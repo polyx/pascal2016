@@ -14,6 +14,11 @@ public class Constant extends PascalSyntax {
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+        constant.check(curScope, lib);
+    }
+
+    @Override
     public String identify() {
         return "<Constant> on line " + lineNum;
     }

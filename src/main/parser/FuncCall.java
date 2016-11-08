@@ -17,6 +17,13 @@ public class FuncCall extends Factor {
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+        PascalDecl funcRef = curScope.findDecl(name, this);
+        // if no elements nothing will happen
+        exprList.forEach(expr -> expr.check(curScope, lib));
+    }
+
+    @Override
     public String identify() {
         return "<FuncCall> on line " + lineNum;
     }

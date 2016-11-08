@@ -25,6 +25,8 @@ public abstract class PascalSyntax {
         Main.log.leaveParser(nonTerm);
     }
 
+    abstract public void check(Block curScope, Library lib);
+
     // del 2
     abstract void prettyPrint();
     // Del 3: abstract void check(Block curScope, Library lib);

@@ -12,6 +12,12 @@ public class VarDecl extends PascalDecl{
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+        type.check(curScope, lib);
+        curScope.addDecl(name, this);
+    }
+
+    @Override
     void prettyPrint() {
         Main.log.prettyPrint(name + ": ");
         type.prettyPrint();

@@ -20,6 +20,14 @@ public class ProcDecl extends PascalDecl {
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+        if (paramList != null) {
+            paramList.check(curScope, lib);
+        }
+        procBody.check(curScope, lib);
+    }
+
+    @Override
     public void prettyPrint() {
         Main.log.prettyPrintLn();
         Main.log.prettyPrint("procedure " + name + " ");

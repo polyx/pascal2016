@@ -14,6 +14,11 @@ public class TermOperator extends Operator {
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+        //pass nothing to check
+    }
+
+    @Override
     public String identify() {
         return "<Term Operator> on line " + lineNum;
     }

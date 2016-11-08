@@ -1,4 +1,9 @@
 package parser;
 
-public class Library {
+public class Library extends Block {
+
+    public Library() {
+        super(-1);
+    }
+
 }

@@ -13,6 +13,15 @@ public class IfStatm extends Statement {
         super(lNum);
     }
 
+    @Override
+    public void check(Block curScope, Library lib) {
+        condition.check(curScope, lib);
+        statement.check(curScope, lib);
+        if (elseStatm != null){
+            elseStatm.check(curScope, lib);
+        }
+    }
+
     @Override public String identify() {
         return "<if-statement> on line " + lineNum;
     }

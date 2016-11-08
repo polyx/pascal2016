@@ -13,6 +13,11 @@ public class InnerExpr extends Factor {
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+        expr.check(curScope, lib);
+    }
+
+    @Override
     public String identify() {
         return "<InnerExpr> on line " + lineNum;
     }

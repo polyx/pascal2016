@@ -14,6 +14,12 @@ public class AssignStatm extends Statement {
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+        var.check(curScope, lib);
+        expr.check(curScope, lib);
+    }
+
+    @Override
     public String identify() {
         return "<Assign-Statement> on line " + lineNum;
     }

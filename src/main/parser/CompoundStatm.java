@@ -11,6 +11,11 @@ public class CompoundStatm extends Statement {
         super(lNum);
     }
 
+    @Override
+    public void check(Block curScope, Library lib) {
+        sl.check(curScope, lib);
+    }
+
     @Override public String identify() {
         return "<CompoundStatm> on line " + lineNum;
     }

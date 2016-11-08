@@ -12,6 +12,11 @@ public class ConstDeclPart extends PascalSyntax {
         super(lNum);
     }
 
+    @Override
+    public void check(Block curScope, Library lib) {
+        constList.forEach(constDecl -> constDecl.check(curScope, lib));
+    }
+
     @Override public String identify() {
         return "<ConstDeclPart> on line " + lineNum;
     }

@@ -17,6 +17,12 @@ public class ParamDecl extends PascalDecl {
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+        curScope.addDecl(this.name,this );
+        paramType.check(curScope, lib);
+    }
+
+    @Override
     public void prettyPrint() {
         Main.log.prettyPrint(name + " : ");
         paramType.prettyPrint();

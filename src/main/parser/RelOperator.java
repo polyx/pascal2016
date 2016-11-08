@@ -15,6 +15,11 @@ public class RelOperator extends Operator {
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+        //pass nothing to check
+    }
+
+    @Override
     public String identify() {
         return "<Rel Operator> on line " + lineNum;
     }

@@ -8,10 +8,16 @@ import java.util.ArrayList;
 import static scanner.TokenKind.*;
 
 public class StatmList extends PascalSyntax {
-    ArrayList<Statement> statmList = new ArrayList<>();
+    ArrayList<Statement> statmList;
 
     public StatmList(int n) {
         super(n);
+        statmList = new ArrayList<>();
+    }
+
+    @Override
+    public void check(Block curScope, Library lib) {
+        statmList.forEach(statement -> statement.check(curScope, lib));
     }
 
     @Override

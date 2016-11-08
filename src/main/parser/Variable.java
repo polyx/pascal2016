@@ -6,10 +6,19 @@ import static scanner.TokenKind.*;
 
 public class Variable extends Factor {
     String name;
-    Expression expr;
+    private Expression expr;
 
-    Variable(int lNum) {
+    private Variable(int lNum) {
         super(lNum);
+    }
+
+    @Override
+    public void check(Block curScope, Library lib) {
+        PascalDecl pascDecl = curScope.findDecl(name, this);
+
+        if(expr != null) {
+            expr.check(curScope, lib);
+        }
     }
 
     @Override public String identify() {

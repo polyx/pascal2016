@@ -5,14 +5,22 @@ import scanner.Scanner;
 
 
 class Expression extends PascalSyntax {
-    SimpleExpr simpleExpr;
-    SimpleExpr simpleExpr2;
-    RelOperator relOperator;
+    private SimpleExpr leftSimpleExpr;
+    private SimpleExpr rightSimpleExpr;
+    private RelOperator relOperator;
 
-    Expression(int lNum) {
+    private Expression(int lNum) {
         super(lNum);
     }
 
+    @Override
+    public void check(Block curScope, Library lib) {
+        leftSimpleExpr.check(curScope, lib);
+        if(relOperator != null) {
+            relOperator.check(curScope, lib);
+            rightSimpleExpr.check(curScope, lib);
+        }
+    }
     @Override
     public String identify() {
         return "<Expression> on line " + lineNum;
@@ -20,10 +28,10 @@ class Expression extends PascalSyntax {
 
     @Override
     public void prettyPrint() {
-        simpleExpr.prettyPrint();
+        leftSimpleExpr.prettyPrint();
         if (relOperator != null) {
             relOperator.prettyPrint();
-            simpleExpr2.prettyPrint();
+            rightSimpleExpr.prettyPrint();
         }
     }
 
@@ -31,10 +39,10 @@ class Expression extends PascalSyntax {
         enterParser("expression");
 
         Expression expr = new Expression(scanner.curLineNum());
-        expr.simpleExpr = SimpleExpr.parse(scanner);
+        expr.leftSimpleExpr = SimpleExpr.parse(scanner);
         if (scanner.curToken.kind.isRelOpr()) {
             expr.relOperator = RelOperator.parse(scanner);
-            expr.simpleExpr2 = SimpleExpr.parse(scanner);
+            expr.rightSimpleExpr = SimpleExpr.parse(scanner);
         }
 
         leaveParser("expression");

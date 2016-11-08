@@ -8,11 +8,17 @@ import scanner.Scanner;
 import static scanner.TokenKind.*;
 
 public class ParamDeclList extends PascalSyntax {
-    ArrayList<ParamDecl> paramDecls = new ArrayList<>();
+    ArrayList<ParamDecl> paramDecls;
     ParamDecl pd;
 
     ParamDeclList(int lNum) {
         super(lNum);
+        paramDecls = new ArrayList<>();
+    }
+
+    @Override
+    public void check(Block curScope, Library lib) {
+        paramDecls.forEach(paramDecl -> paramDecl.check(curScope, lib));
     }
 
     @Override

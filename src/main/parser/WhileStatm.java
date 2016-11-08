@@ -13,6 +13,12 @@ class WhileStatm extends Statement {
         super(lNum);
     }
 
+    @Override
+    public void check(Block curScope, Library lib) {
+        expr.check(curScope, lib);
+        body.check(curScope, lib);
+    }
+
     public void prettyPrint(){
         Main.log.prettyPrint("while ");
         expr.prettyPrint();

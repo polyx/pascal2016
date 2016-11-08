@@ -11,6 +11,11 @@ public class NamedConst extends UnsignedConstant {
         super(lNum);
     }
 
+    @Override
+    public void check(Block curScope, Library lib) {
+        curScope.findDecl(name, this);
+    }
+
     @Override public String identify() {
         return "<named-const> on line " + lineNum;
     }

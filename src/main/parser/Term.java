@@ -13,6 +13,11 @@ public class Term extends PascalSyntax {
     }
 
     @Override
+    public void check(Block curScope, Library lib) {
+        factorList.forEach(factor -> factor.check(curScope, lib));
+    }
+
+    @Override
     public String identify() {
         return "<Term> on line " + lineNum;
     }
