@@ -7,7 +7,7 @@ import static main.Main.log;
 
 public class ArrayType extends Type {
     Constant const1, const2;
-    Type type;
+    Type typeName;
     public ArrayType(int n) {
         super(n);
     }
@@ -25,7 +25,7 @@ public class ArrayType extends Type {
         log.prettyPrint("..");
         const2.prettyPrint();
         log.prettyPrint("] of ");
-        type.prettyPrint();
+        typeName.prettyPrint();
     }
 
     @Override
@@ -34,7 +34,7 @@ public class ArrayType extends Type {
     }
 
     public static ArrayType parse(Scanner scanner){
-        enterParser("array-type");
+        enterParser("array-typeName");
         ArrayType arrType = new ArrayType(scanner.curLineNum());
         scanner.skip(arrayToken);
         scanner.skip(leftBracketToken);
@@ -43,9 +43,9 @@ public class ArrayType extends Type {
         arrType.const2 = Constant.parse(scanner);
         scanner.skip(rightBracketToken);
         scanner.skip(ofToken);
-        arrType.type = Type.parse(scanner);
+        arrType.typeName = Type.parse(scanner);
 
-        leaveParser("array-type");
+        leaveParser("array-typeName");
         return arrType;
     }
 }

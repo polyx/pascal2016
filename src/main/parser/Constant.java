@@ -8,6 +8,9 @@ import static scanner.TokenKind.*;
 public class Constant extends PascalSyntax {
     PrefixOperator prefix;
     UnsignedConstant constant;
+    types.Type type;
+
+    int constVal;
 
     Constant(int lNum) {
         super(lNum);
@@ -16,6 +19,17 @@ public class Constant extends PascalSyntax {
     @Override
     public void check(Block curScope, Library lib) {
         constant.check(curScope, lib);
+
+        type = constant.type;
+        constVal = constant.constVal;
+        if (prefix != null) {
+            String oprName = prefix.name;
+            constant.type.checkType(lib.intType, "Prefix "+oprName, this,
+                    "Prefix + or - may only be applied to Integers.");
+            if (prefix.name.equals(subtractToken.toString())) {
+                constVal = -constVal;
+            }
+        }
     }
 
     @Override

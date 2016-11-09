@@ -17,13 +17,14 @@ public class Block extends PascalSyntax {
     ArrayList<FuncDecl> funcDecls;
     ArrayList<ProcDecl> procDecls;
     HashMap<String, PascalDecl> decls;
-    private Block outerScope;
+    Block outerScope;
 
     Block(int lNum) {
         super(lNum);
         funcDecls = new ArrayList<>();
         procDecls = new ArrayList<>();
         decls = new HashMap<>();
+//        outerScope = Main.library;
     }
 
     void addDecl(String id, PascalDecl d) {
@@ -38,9 +39,9 @@ public class Block extends PascalSyntax {
         if (d != null) {
             Main.log.noteBinding(id, where, d);
             return d;
-        }else if (outerScope != null) {
+        } else if (outerScope != null) {
             return outerScope.findDecl(id, where);
-        }else{
+        } else {
             where.error("Name " + id + " is unknown!");
             return null; // Required by the Java compiler.
         }
@@ -56,7 +57,10 @@ public class Block extends PascalSyntax {
             varDeclPart.check(this, lib);
         }
         if (funcDecls.size() != 0) {
-            funcDecls.forEach(funcDecl -> funcDecl.check(this, lib));
+//            funcDecls.forEach(funcDecl -> funcDecl.check(this, lib));
+            for (FuncDecl fd : funcDecls) {
+                fd.check(this, lib);
+            }
         }
         if (procDecls.size() != 0) {
             procDecls.forEach(funcDecl -> funcDecl.check(this, lib));

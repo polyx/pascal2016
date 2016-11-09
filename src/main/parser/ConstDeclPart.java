@@ -14,7 +14,9 @@ public class ConstDeclPart extends PascalSyntax {
 
     @Override
     public void check(Block curScope, Library lib) {
-        constList.forEach(constDecl -> constDecl.check(curScope, lib));
+        for (ConstDecl constDecl : constList){
+            constDecl.check(curScope, lib);
+        }
     }
 
     @Override public String identify() {

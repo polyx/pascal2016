@@ -12,7 +12,7 @@ public class Main {
 
     // Del 3: public static parser.Library library;
     public static LogFile log = new LogFile();
-
+    public static Library library = new Library(-1);
     private static String sourceFileName, baseFileName;
     private static boolean testChecker = false,
             testParser = false, testScanner = false;
@@ -121,7 +121,6 @@ public class Main {
             prog.prettyPrint();
         }
 
-        Library library = new Library();
         prog.check(library, library);
     }
 

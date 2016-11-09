@@ -6,7 +6,7 @@ import static scanner.TokenKind.*;
 
 public class Variable extends Factor {
     String name;
-    private Expression expr;
+    Expression expr;
 
     private Variable(int lNum) {
         super(lNum);
@@ -15,9 +15,16 @@ public class Variable extends Factor {
     @Override
     public void check(Block curScope, Library lib) {
         PascalDecl pascDecl = curScope.findDecl(name, this);
+        type = pascDecl.type;
 
+        /*if (pascDecl instanceof FuncDecl) {
+            type = ((FuncDecl) pascDecl).type;
+        } else if (pascDecl instanceof ParamDecl) {
+            type = ((ParamDecl) pascDecl).paramType.type;
+        }*/
         if(expr != null) {
             expr.check(curScope, lib);
+            type.checkType(expr.type, "variable " + name, this, "variable is of " + type.identify());
         }
     }
 

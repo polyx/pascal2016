@@ -13,7 +13,7 @@ public class NamedConst extends UnsignedConstant {
 
     @Override
     public void check(Block curScope, Library lib) {
-        curScope.findDecl(name, this);
+        PascalDecl decl = curScope.findDecl(name, this);
     }
 
     @Override public String identify() {

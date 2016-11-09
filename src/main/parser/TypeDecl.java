@@ -23,7 +23,11 @@ public class TypeDecl extends PascalDecl {
 
     @Override
     public String identify() {
-        return null;
+        if (isInLibrary()){
+            return "integer in library";
+        }else {
+            return null;
+        }
     }
 
     @Override

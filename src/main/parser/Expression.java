@@ -5,9 +5,10 @@ import scanner.Scanner;
 
 
 class Expression extends PascalSyntax {
-    private SimpleExpr leftSimpleExpr;
-    private SimpleExpr rightSimpleExpr;
-    private RelOperator relOperator;
+    SimpleExpr leftSimpleExpr;
+    SimpleExpr rightSimpleExpr;
+    RelOperator relOperator;
+    types.Type type;
 
     private Expression(int lNum) {
         super(lNum);
@@ -16,9 +17,14 @@ class Expression extends PascalSyntax {
     @Override
     public void check(Block curScope, Library lib) {
         leftSimpleExpr.check(curScope, lib);
+
+        type = leftSimpleExpr.type;
         if(relOperator != null) {
-            relOperator.check(curScope, lib);
             rightSimpleExpr.check(curScope, lib);
+            String operatorName = relOperator.token;
+            type.checkType(rightSimpleExpr.type, operatorName+" operands", this,
+                    "Operands to "+operatorName+" are of different typeName!");
+            type = lib.booleanType;
         }
     }
     @Override

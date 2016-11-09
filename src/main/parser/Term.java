@@ -7,6 +7,7 @@ import scanner.Scanner;
 public class Term extends PascalSyntax {
     ArrayList<Factor> factorList = new ArrayList<>();
     ArrayList<FactorOperator> factorOperators = new ArrayList<>();
+    types.Type type;
 
     Term(int lNum) {
         super(lNum);
@@ -14,7 +15,10 @@ public class Term extends PascalSyntax {
 
     @Override
     public void check(Block curScope, Library lib) {
-        factorList.forEach(factor -> factor.check(curScope, lib));
+        for(Factor f : factorList){
+            f.check(curScope, lib);
+            type = f.type;
+        }
     }
 
     @Override

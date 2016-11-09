@@ -1,12 +1,13 @@
 package parser;
 
 
+import main.Main;
 import scanner.Scanner;
 
 import static scanner.TokenKind.*;
 
 public abstract class UnsignedConstant extends Factor {
-
+    int constVal;
     UnsignedConstant(int lNum) {
         super(lNum);
     }
@@ -23,8 +24,10 @@ public abstract class UnsignedConstant extends Factor {
             unsignConst = NamedConst.parse(scanner);
         } else if (scanner.curToken.kind == intValToken) {
             unsignConst = NumberLiteral.parse(scanner);
+            unsignConst.type = Main.library.intType;
         } else if (scanner.curToken.kind == charValToken) {
             unsignConst = CharLiteral.parse(scanner);
+            unsignConst.type = Main.library.charType;
         } else {
             scanner.testError("unsigned constant");
         }

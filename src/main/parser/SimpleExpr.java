@@ -3,11 +3,14 @@ package parser;
 import java.util.ArrayList;
 
 import scanner.Scanner;
+import types.*;
+import types.Type;
 
 public class SimpleExpr extends PascalSyntax {
     PrefixOperator prefixOper;
     ArrayList<Term> termList = new ArrayList<>();
     ArrayList<TermOperator> termOperList = new ArrayList<>();
+    types.Type type;
 
     SimpleExpr(int lNum) {
         super(lNum);
@@ -20,7 +23,10 @@ public class SimpleExpr extends PascalSyntax {
 
     @Override
     public void check(Block curScope, Library lib) {
-        termList.forEach(term -> term.check(curScope, lib));
+        for (Term term : termList) {
+            term.check(curScope, lib);
+            type = term.type;
+        }
     }
 
     @Override

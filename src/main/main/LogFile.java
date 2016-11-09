@@ -41,7 +41,9 @@ public class LogFile {
 	    PrintWriter log = (nLogLines==0 ? new PrintWriter(logFileName) :
 		new PrintWriter(new FileOutputStream(logFileName,true)));
 	    log.println(data);  ++nLogLines;
-	    log.close();
+        //LOG STDOUT
+        System.out.println(data);
+        log.close();
 	} catch (FileNotFoundException e) {
 	    String lName = logFileName;
 	    logFileName = null;  // To avoid infinite recursion

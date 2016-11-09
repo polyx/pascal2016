@@ -6,21 +6,21 @@ import scanner.Scanner;
 import static scanner.TokenKind.*;
 
 public class VarDecl extends PascalDecl{
-    Type type;
+    Type typeName;
     VarDecl(String id, int lNum) {
         super(id, lNum);
     }
 
     @Override
     public void check(Block curScope, Library lib) {
-        type.check(curScope, lib);
+        typeName.check(curScope, lib);
         curScope.addDecl(name, this);
     }
 
     @Override
     void prettyPrint() {
         Main.log.prettyPrint(name + ": ");
-        type.prettyPrint();
+        typeName.prettyPrint();
         Main.log.prettyPrint(";");
     }
 
@@ -37,7 +37,7 @@ public class VarDecl extends PascalDecl{
         scanner.skip(nameToken);
         scanner.skip(colonToken);
 
-        varDecl.type = Type.parse(scanner);
+        varDecl.typeName = Type.parse(scanner);
 
         scanner.skip(semicolonToken);
 

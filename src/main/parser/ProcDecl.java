@@ -9,14 +9,17 @@ public class ProcDecl extends PascalDecl {
     ParamDeclList paramList;
     Block procBody;
 
-
     ProcDecl(String id, int lNum) {
         super(id, lNum);
     }
 
     @Override
     public String identify() {
-        return "<proc decl> on line " + lineNum;
+        if (lineNum == -1){
+            return "<proc decl> " + name + " in the library";
+        }else {
+            return "<proc decl> on line " + lineNum;
+        }
     }
 
     @Override

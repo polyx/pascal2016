@@ -7,7 +7,7 @@ import static scanner.TokenKind.*;
 
 abstract class Factor extends PascalSyntax {
     static Factor factor;
-
+    types.Type type;
     Factor(int lNum) {
         super(lNum);
     }

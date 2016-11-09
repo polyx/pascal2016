@@ -12,14 +12,14 @@ public abstract class Type extends PascalSyntax{
     }
 
     public static Type parse(Scanner scanner){
-        enterParser("type");
+        enterParser("typeName");
         Type t;
         if (scanner.curToken.kind == arrayToken){
             t = ArrayType.parse(scanner);
         }else {
             t = TypeName.parse(scanner);
         }
-        leaveParser("type");
+        leaveParser("typeName");
         return t;
     }
 }

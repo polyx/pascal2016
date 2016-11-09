@@ -20,6 +20,7 @@ public class ParamDecl extends PascalDecl {
     public void check(Block curScope, Library lib) {
         curScope.addDecl(this.name,this );
         paramType.check(curScope, lib);
+        type = paramType.type;
     }
 
     @Override

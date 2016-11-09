@@ -14,7 +14,7 @@ public class CharLiteral extends UnsignedConstant {
 
     @Override
     public void check(Block curScope, Library lib) {
-        // pass nothing to check
+        constVal = charVal.charAt(0);
     }
 
     @Override
