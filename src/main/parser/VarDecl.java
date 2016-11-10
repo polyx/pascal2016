@@ -14,6 +14,7 @@ public class VarDecl extends PascalDecl{
     @Override
     public void check(Block curScope, Library lib) {
         typeName.check(curScope, lib);
+        type = typeName.type;
         curScope.addDecl(name, this);
     }
 
@@ -26,7 +27,8 @@ public class VarDecl extends PascalDecl{
 
     @Override
     public String identify() {
-        return "<var-decl> on line " + lineNum;
+        return "<var decl> " + name +
+                " on line " + lineNum;
     }
 
     static public VarDecl parse(Scanner scanner){
@@ -52,12 +54,12 @@ public class VarDecl extends PascalDecl{
 
     @Override
     void checkWhetherFunction(PascalSyntax where) {
-
+        where.error(where.identify() + " is not a function");
     }
 
     @Override
     void checkWhetherProcedure(PascalSyntax where) {
-
+        where.error(where.identify() + " is not a procedure");
     }
 
     @Override

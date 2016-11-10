@@ -35,7 +35,8 @@ public class Program extends PascalDecl {
         enterParser("program");
 
         scanner.skip(programToken);
-        Program p = new Program(scanner.nextToken.id, scanner.curLineNum());
+//        System.out.println(scanner.nextToken.id.toLowerCase());
+        Program p = new Program(scanner.curToken.id, scanner.curLineNum());
         p.pname = scanner.curToken.id;
         scanner.skip(nameToken);
         scanner.skip(semicolonToken);

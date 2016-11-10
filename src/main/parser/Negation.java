@@ -7,13 +7,16 @@ import static scanner.TokenKind.*;
 
 public class Negation extends Factor {
     Factor fact;
+
     Negation(int lNum) {
         super(lNum);
     }
 
     @Override
     public void check(Block curScope, Library lib) {
-        // nothing to check
+        fact.check(curScope, lib);
+        type = fact.type;
+        fact.type.checkType(lib.booleanType, "'not' operand", this, "cannot apply 'not' to a non boolean factor");
     }
 
     @Override

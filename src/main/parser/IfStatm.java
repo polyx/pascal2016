@@ -16,6 +16,7 @@ public class IfStatm extends Statement {
     @Override
     public void check(Block curScope, Library lib) {
         condition.check(curScope, lib);
+        condition.type.checkType(lib.booleanType, "if-test", this, "if condition is not of type boolean");
         statement.check(curScope, lib);
         if (elseStatm != null){
             elseStatm.check(curScope, lib);

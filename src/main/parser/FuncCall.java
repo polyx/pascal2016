@@ -18,9 +18,22 @@ public class FuncCall extends Factor {
 
     @Override
     public void check(Block curScope, Library lib) {
-        PascalDecl funcRef = curScope.findDecl(name, this);
-        // if no elements nothing will happen
-        exprList.forEach(expr -> expr.check(curScope, lib));
+        PascalDecl declRef = curScope.findDecl(name.toLowerCase(), this);
+        FuncDecl funcRef = (FuncDecl) declRef;
+        declRef.checkWhetherFunction(this);
+        if (exprList.size() != funcRef.paramList.paramDecls.size()){
+            error("argument number mismatch.\nExpected: "+ funcRef.paramList.paramDecls.size()
+            +"\nGot: " + exprList.size());
+        }
+        int counter = 0;
+        for (Expression expr : exprList) {
+            expr.check(curScope, lib);
+            expr.type.checkType(funcRef.paramList.paramDecls.get(counter).type,
+                    "param " + (counter+1), this,
+                    "Illigal argument type of arg #"+ (counter+1));
+            this.type = funcRef.type;
+            counter++;
+        }
     }
 
     @Override

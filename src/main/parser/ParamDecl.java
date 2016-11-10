@@ -13,7 +13,7 @@ public class ParamDecl extends PascalDecl {
 
     @Override
     public String identify() {
-        return "<param-decl> on line " + lineNum;
+        return "<param decl> " +name+ " on line " + lineNum;
     }
 
     @Override
@@ -48,12 +48,12 @@ public class ParamDecl extends PascalDecl {
 
     @Override
     void checkWhetherFunction(PascalSyntax where) {
-
+        where.error(where.identify() + " is not a function");
     }
 
     @Override
     void checkWhetherProcedure(PascalSyntax where) {
-
+        where.error(where.identify() + " is not a procedure");
     }
 
     @Override

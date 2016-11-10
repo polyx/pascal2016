@@ -7,6 +7,7 @@ import static scanner.TokenKind.*;
 public class Variable extends Factor {
     String name;
     Expression expr;
+    PascalDecl pascDecl;
 
     private Variable(int lNum) {
         super(lNum);
@@ -14,17 +15,19 @@ public class Variable extends Factor {
 
     @Override
     public void check(Block curScope, Library lib) {
-        PascalDecl pascDecl = curScope.findDecl(name, this);
+        pascDecl = curScope.findDecl(name.toLowerCase(), this);
         type = pascDecl.type;
+        if (pascDecl instanceof ConstDecl && pascDecl.isInLibrary()){
+            if (pascDecl.name.equals("true") || pascDecl.name.equals("false")) {
+                type = lib.booleanType;
+            }
+        }
 
-        /*if (pascDecl instanceof FuncDecl) {
-            type = ((FuncDecl) pascDecl).type;
-        } else if (pascDecl instanceof ParamDecl) {
-            type = ((ParamDecl) pascDecl).paramType.type;
-        }*/
         if(expr != null) {
             expr.check(curScope, lib);
-            type.checkType(expr.type, "variable " + name, this, "variable is of " + type.identify());
+            //checking that index is an int
+            expr.type.checkType(lib.intType, "array index", this, "variable is of " + type.identify());
+
         }
     }
 

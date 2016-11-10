@@ -7,7 +7,6 @@ import static scanner.TokenKind.*;
 
 public class TypeName extends Type {
     String name;
-    types.Type type;
 
     public TypeName(int n) {
         super(n);
@@ -15,7 +14,7 @@ public class TypeName extends Type {
 
     @Override
     public void check(Block curScope, Library lib) {
-        curScope.findDecl(name, this);
+        curScope.findDecl(name.toLowerCase(), this);
         switch (name.toLowerCase()) {
             case "integer":
                 type = Main.library.intType;

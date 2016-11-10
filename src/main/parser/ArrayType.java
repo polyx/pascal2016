@@ -16,6 +16,9 @@ public class ArrayType extends Type {
     public void check(Block curScope, Library lib) {
         const1.check(curScope, lib);
         const2.check(curScope, lib);
+        typeName.check(curScope, lib);
+        type = typeName.type;
+        const1.type.checkType(const2.type, "array limits", this, "type mismatch in array limits");
     }
 
     @Override

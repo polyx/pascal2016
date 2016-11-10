@@ -2,6 +2,7 @@ package parser;
 
 import main.Main;
 import scanner.Scanner;
+
 import static scanner.TokenKind.*;
 
 
@@ -16,7 +17,10 @@ public class AssignStatm extends Statement {
     @Override
     public void check(Block curScope, Library lib) {
         var.check(curScope, lib);
+        var.pascDecl.checkWhetherAssignable(this);
         expr.check(curScope, lib);
+        var.type.checkType(expr.type, ":=", this, "type missmatch left and right side, type of " +
+                var.name + " (" + var.type.identify() + ") != " + expr.type.identify());
     }
 
     @Override

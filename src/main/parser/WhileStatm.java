@@ -16,6 +16,10 @@ class WhileStatm extends Statement {
     @Override
     public void check(Block curScope, Library lib) {
         expr.check(curScope, lib);
+        expr.type.checkType(lib.booleanType, "while-test", this,
+                "unexpected expression type in while statement.\n" +
+                        "Expected: boolean\n" +
+                        "Got: " + expr.type);
         body.check(curScope, lib);
     }
 

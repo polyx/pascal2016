@@ -13,7 +13,9 @@ public class NamedConst extends UnsignedConstant {
 
     @Override
     public void check(Block curScope, Library lib) {
-        PascalDecl decl = curScope.findDecl(name, this);
+        PascalDecl decl = curScope.findDecl(name.toLowerCase(), this);
+        type = decl.type;
+        constVal = ((ConstDecl) decl).constant.constVal;
     }
 
     @Override public String identify() {

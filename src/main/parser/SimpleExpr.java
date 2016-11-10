@@ -23,9 +23,34 @@ public class SimpleExpr extends PascalSyntax {
 
     @Override
     public void check(Block curScope, Library lib) {
-        for (Term term : termList) {
+        for (int i = 0; i < termList.size(); i++) {
+            Term term = termList.get(i);
             term.check(curScope, lib);
             type = term.type;
+            if (i >= 1) {
+                int counter = i - 1;
+                if (termOperList.size() > 0) {
+                    if (termOperList.get(counter).name.equals("+") ||
+                            termOperList.get(counter).name.equals("-")) {
+                        termList.get(i - 1).type.checkType(lib.intType,
+                                "left " + termOperList.get(counter).name + " operand", this,
+                                "left operand to " + termOperList.get(counter).name + " is not a number");
+                        term.type.checkType(lib.intType,
+                                "right " + termOperList.get(counter).name + " operand", this,
+                                "right operand to " + termOperList.get(counter).name + " is not a number");
+                    }else if (termOperList.get(counter).name.equals("or")){
+                        termList.get(i - 1).type.checkType(lib.booleanType,
+                                "left or operand", this,
+                                "left operand to or is not a boolean");
+                        term.type.checkType(lib.booleanType,
+                                "right or operand", this,
+                                "right operand to or is not a boolean");
+                    }
+                }
+            }
+        }
+        if (prefixOper != null){
+            termList.get(0).type.checkType(lib.intType, "prefix " + prefixOper.name + " operand", this, "cannont apply " + prefixOper.name + "to term of type " + termList.get(0).type);
         }
     }
 

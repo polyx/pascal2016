@@ -24,7 +24,7 @@ public class TypeDecl extends PascalDecl {
     @Override
     public String identify() {
         if (isInLibrary()){
-            return "integer in library";
+            return "<type decl> "+name+" in the library";
         }else {
             return null;
         }
@@ -32,21 +32,21 @@ public class TypeDecl extends PascalDecl {
 
     @Override
     void checkWhetherAssignable(PascalSyntax where) {
-
+        where.error("Cannot assign to a type");
     }
 
     @Override
     void checkWhetherFunction(PascalSyntax where) {
-
+        where.error("Type is not a function");
     }
 
     @Override
     void checkWhetherProcedure(PascalSyntax where) {
-
+        where.error("Type is not a procedure");
     }
 
     @Override
     void checkWhetherValue(PascalSyntax where) {
-
+        where.error("Type is not a value");
     }
 }

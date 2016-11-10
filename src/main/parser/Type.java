@@ -7,6 +7,8 @@ import static scanner.TokenKind.*;
  * Created by filos on 17/10/2016.
  */
 public abstract class Type extends PascalSyntax{
+    types.Type type;
+
     public Type(int n) {
         super(n);
     }

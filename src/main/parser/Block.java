@@ -28,6 +28,7 @@ public class Block extends PascalSyntax {
     }
 
     void addDecl(String id, PascalDecl d) {
+        id = id.toLowerCase();
         if (decls.containsKey(id)) {
             d.error(id + " declared twice in same block!");
         }

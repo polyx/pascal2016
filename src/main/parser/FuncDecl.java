@@ -15,7 +15,7 @@ public class FuncDecl extends ProcDecl {
 
     @Override
     public String identify() {
-        return "<func-decl> on line " + lineNum;
+        return "<func-decl> "+name+" on line " + lineNum;
     }
 
     @Override
@@ -24,9 +24,9 @@ public class FuncDecl extends ProcDecl {
         if (paramList != null) {
             paramList.check(curScope, lib);
         }
-        funcBody.check(curScope, lib);
         funcTypeName.check(curScope, lib);
         type = funcTypeName.type;
+        funcBody.check(curScope, lib);
     }
 
     @Override
@@ -63,5 +63,25 @@ public class FuncDecl extends ProcDecl {
 
         leaveParser("func decl");
         return funcDecl;
+    }
+
+    @Override
+    void checkWhetherAssignable(PascalSyntax where) {
+
+    }
+
+    @Override
+    void checkWhetherFunction(PascalSyntax where) {
+
+    }
+
+    @Override
+    void checkWhetherProcedure(PascalSyntax where) {
+        where.error(where.identify() + " is a function, not a procedure");
+    }
+
+    @Override
+    void checkWhetherValue(PascalSyntax where) {
+        where.error(where.identify() + " is not a value");
     }
 }

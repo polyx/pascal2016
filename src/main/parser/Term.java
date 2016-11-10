@@ -15,9 +15,39 @@ public class Term extends PascalSyntax {
 
     @Override
     public void check(Block curScope, Library lib) {
-        for(Factor f : factorList){
+        int counter = 0;
+        for (int i = 0; i < factorList.size(); i++) {
+            Factor f = factorList.get(i);
             f.check(curScope, lib);
             type = f.type;
+            if (i>=1){
+                counter = i-1;
+                if (factorOperators.size() > 0){
+                    if (factorOperators.get(counter).id.equals("mod") ||
+                        factorOperators.get(counter).id.equals("div")||
+                        factorOperators.get(counter).id.equals("*")) {
+                        //left hand side
+                        factorList.get(i-1).type.checkType(lib.intType,
+                                "left "+ factorOperators.get(counter).id +" operand", this,
+                                "left operand to "+ factorOperators.get(counter).id +" is not a number");
+
+                        //right hand side
+                        f.type.checkType(lib.intType,
+                                "right "+ factorOperators.get(counter).id + " operand", this,
+                                "right operand to "+ factorOperators.get(counter).id +" is not a number");
+                    }else if(factorOperators.get(counter).id.equals("and")){
+                        //left hand side
+                        factorList.get(i-1).type.checkType(lib.booleanType,
+                                "left and operand", this,
+                                "left operand to and is not a boolean");
+
+                        //right hand side
+                        f.type.checkType(lib.booleanType,
+                                "right and operand", this,
+                                "right operand to and is not a boolean");
+                    }
+                }
+            }
         }
     }
 
