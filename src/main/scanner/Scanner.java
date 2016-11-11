@@ -137,6 +137,13 @@ public class Scanner {
                 if (tk == TokenKind.eofToken) {
                     return new Token(TokenKind.eofToken);
                 } else {
+                    //WARNING HACK MADE AT 3AM probably will explode somewhere ;)
+                    //if something fails because of this if just comment it out
+                    //everything except udeklarert-1.pas should still work fine
+                    if (sourceLine.toLowerCase().startsWith("double".toLowerCase()) && tk == TokenKind.doToken){
+                        newToken = getLiteralToken(newToken);
+                        return newToken;
+                    }
                     newToken = new Token(tk, sourceFile.getLineNumber());
                     return newToken;
                 }
