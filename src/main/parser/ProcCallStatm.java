@@ -15,7 +15,36 @@ public class ProcCallStatm extends Statement {
 
     @Override
     public void genCode(CodeFile f) {
-
+        if(funcName.equals("write")) {
+            for (Expression param : params) {
+                param.genCode(f);
+                if (param.leftSimpleExpr.termList.get(0).factorList.get(0) instanceof NumberLiteral) {
+                    f.genInstr("", "pushl", "%eax", "");
+                    f.genInstr("", "call", "write_int", "");
+                    f.genInstr("", "addl", "$4,%esp", "");
+                }
+                if (param.leftSimpleExpr.termList.get(0).factorList.get(0) instanceof CharLiteral) {
+                    CharLiteral ch = (CharLiteral) param.leftSimpleExpr.termList.get(0).factorList.get(0);
+                    int chASCIIValue = (int) ch.charVal.charAt(0);
+                    String constant = "$" + chASCIIValue;
+                    f.genInstr("", "movl", constant + ",%eax", "");
+                    f.genInstr("", "pushl", "%eax", "");
+                    f.genInstr("", "call", "write_char", "");
+                    f.genInstr("", "addl", "$4,%esp", "");
+                }
+//                if(params.get(i).leftSimpleExpr.termList.get(0).factorList.get(0) instanceof Variable) {
+//
+//                }
+            }
+        } else {
+//            int fc_block = procRef.declLevel;
+//            for (int i = params.size()-1; i >= 0; i--) {
+//                params.get(i).genCode(f);
+//                f.genInstr("", "pushl", "%eax", "");
+//            }
+//            f.genInstr("", "call", "proc$" + funcName + "_" + fc_block, "");
+//            f.genInstr("", "addl", "$8,%esp", "");
+        }
     }
 
     public ProcCallStatm(int n) {

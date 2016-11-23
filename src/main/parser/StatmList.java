@@ -13,7 +13,7 @@ public class StatmList extends PascalSyntax {
 
     @Override
     public void genCode(CodeFile f) {
-
+        statmList.forEach(statement -> statement.genCode(f));
     }
 
     public StatmList(int n) {

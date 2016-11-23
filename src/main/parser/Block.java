@@ -25,7 +25,21 @@ public class Block extends PascalSyntax {
 
     @Override
     public void genCode(CodeFile f) {
-
+        if (constDeclPart != null) {
+            constDeclPart.genCode(f);
+        }
+        if (varDeclPart != null) {
+            varDeclPart.genCode(f);
+        }
+        if (!funcDecls.isEmpty()) {
+            funcDecls.forEach(funcDecl -> funcDecl.genCode(f));
+        }
+        if (!procDecls.isEmpty()) {
+            procDecls.forEach(procDecl -> procDecl.genCode(f));
+        }
+        if (statmList != null) {
+            statmList.genCode(f);
+        }
     }
 
     Block(int lNum) {

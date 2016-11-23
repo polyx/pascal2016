@@ -39,14 +39,23 @@ public class CodeFile {
 
 
     public void genInstr(String lab, String instr, String arg, String comment) {
-	if (lab.length() > 0)
-	    code.println(lab + ":");
+	if (lab.length() > 0) {
+		code.println(lab + ":");
+		System.out.println(lab + ":");
+		System.out.flush();
+	}
 	if ((instr+arg+comment).length() > 0) {
 	    code.printf("        %-7s %-23s ", instr, arg);
-	    if (comment.length() > 0) {
-		code.print("# " + comment);
-	    }
+		System.out.printf("        %-7s %-23s ", instr, arg);
+		System.out.flush();
+		if (comment.length() > 0) {
+			code.print("# " + comment);
+			System.out.print("# " + comment);
+			System.out.flush();
+		}
 	    code.println();
+		System.out.println();
+		System.out.flush();
 	}
     }
 }
