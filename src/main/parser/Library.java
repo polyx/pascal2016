@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import types.*;
 
 public class Library extends Block {
@@ -11,18 +12,12 @@ public class Library extends Block {
 
     Block outerScrope = null;
 
+    public void genCode(CodeFile f){
+
+    }
+
     public Library(int lnum) {
         super(lnum);
-//        ProcDecl writeProc = new ProcDecl("write", lnum);
-//
-//        TypeDecl intType = new TypeDecl("integer", lnum);
-//        TypeDecl booleanType = new TypeDecl("boolean", lnum);
-//        TypeDecl charType = new TypeDecl("char", lnum);
-//
-//        ConstDecl cd = new ConstDecl("eol", lnum);
-//        ConstDecl edt = new ConstDecl("true", lnum);
-//        ConstDecl edf = new ConstDecl("false", lnum);
-
         decls.put("write", new ProcDecl("write", lnum));
 
         decls.put("integer", new TypeDecl("integer", lnum));

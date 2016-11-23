@@ -1,10 +1,16 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 
 
 public class EmptyStatm extends Statement{
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     public EmptyStatm(int n) {
         super(n);
     }

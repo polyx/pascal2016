@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import scanner.Scanner;
 
 import static scanner.TokenKind.*;
@@ -8,6 +9,12 @@ import static main.Main.log;
 public class ArrayType extends Type {
     Constant const1, const2;
     Type typeName;
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     public ArrayType(int n) {
         super(n);
     }

@@ -2,6 +2,7 @@ package parser;
 
 import java.util.ArrayList;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 
@@ -9,6 +10,11 @@ import static scanner.TokenKind.*;
 
 public class VarDeclPart extends PascalSyntax {
     ArrayList<VarDecl> varList;
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     VarDeclPart(int lNum) {
         super(lNum);

@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import static scanner.TokenKind.*;
@@ -27,6 +28,11 @@ public class ConstDecl extends PascalDecl {
         }else {
             return "<const decl> " + name + " on line " + lineNum;
         }
+
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
 
     }
 

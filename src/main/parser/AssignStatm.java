@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 
@@ -9,6 +10,11 @@ import static scanner.TokenKind.*;
 public class AssignStatm extends Statement {
     Variable var;
     Expression expr;
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     AssignStatm(int lNum) {
         super(lNum);
@@ -34,8 +40,6 @@ public class AssignStatm extends Statement {
         Main.log.prettyPrint(" := ");
         expr.prettyPrint();
         Main.log.prettyPrint("");
-//        Main.log.prettyPrintLn();
-//        Main.log.prettyPrintLn();
     }
 
     static AssignStatm parse(Scanner s) {

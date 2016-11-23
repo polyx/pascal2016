@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 
@@ -7,6 +8,11 @@ import static scanner.TokenKind.*;
 
 public class TypeName extends Type {
     String name;
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     public TypeName(int n) {
         super(n);

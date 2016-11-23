@@ -12,6 +12,11 @@ public class Constant extends PascalSyntax {
 
     int constVal;
 
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     Constant(int lNum) {
         super(lNum);
     }

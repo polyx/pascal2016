@@ -8,6 +8,11 @@ import static scanner.TokenKind.*;
 public class InnerExpr extends Factor {
     Expression expr;
 
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     InnerExpr(int lNum) {
         super(lNum);
     }

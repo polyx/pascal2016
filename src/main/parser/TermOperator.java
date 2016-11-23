@@ -1,6 +1,7 @@
 package parser;
 
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 
@@ -8,6 +9,11 @@ import static scanner.TokenKind.*;
 
 public class TermOperator extends Operator {
     String name;
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     TermOperator(int lNum) {
         super(lNum);

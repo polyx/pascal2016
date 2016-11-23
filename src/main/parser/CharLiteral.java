@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 
@@ -7,6 +8,11 @@ import static scanner.TokenKind.*;
 
 public class CharLiteral extends UnsignedConstant {
     String charVal;
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     CharLiteral(int lNum) {
         super(lNum);

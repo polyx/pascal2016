@@ -1,6 +1,7 @@
 package parser;
 
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 
@@ -18,6 +19,11 @@ public class Block extends PascalSyntax {
     ArrayList<ProcDecl> procDecls;
     HashMap<String, PascalDecl> decls;
     Block outerScope;
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     Block(int lNum) {
         super(lNum);

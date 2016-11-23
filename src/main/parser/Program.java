@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 
@@ -19,6 +20,11 @@ public class Program extends PascalDecl {
         return "<Program on line >" + lineNum;
     }
 
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     @Override
     public void check(Block curScope, Library lib) {

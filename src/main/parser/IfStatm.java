@@ -9,6 +9,11 @@ public class IfStatm extends Statement {
     Statement statement;
     Statement elseStatm;
 
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     IfStatm(int lNum) {
         super(lNum);
     }

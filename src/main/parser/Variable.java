@@ -9,6 +9,11 @@ public class Variable extends Factor {
     Expression expr;
     PascalDecl pascDecl;
 
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     private Variable(int lNum) {
         super(lNum);
     }

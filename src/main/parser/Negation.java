@@ -8,6 +8,11 @@ import static scanner.TokenKind.*;
 public class Negation extends Factor {
     Factor fact;
 
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     Negation(int lNum) {
         super(lNum);
     }

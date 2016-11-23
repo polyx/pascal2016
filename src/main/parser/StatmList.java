@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 
@@ -9,6 +10,11 @@ import static scanner.TokenKind.*;
 
 public class StatmList extends PascalSyntax {
     ArrayList<Statement> statmList;
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     public StatmList(int n) {
         super(n);

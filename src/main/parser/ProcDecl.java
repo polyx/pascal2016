@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 
@@ -20,6 +21,11 @@ public class ProcDecl extends PascalDecl {
         }else {
             return "<proc decl> " + name + " on line " + lineNum;
         }
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+
     }
 
     @Override

@@ -1,6 +1,7 @@
 package parser;
 
 
+import main.CodeFile;
 import scanner.Scanner;
 
 
@@ -9,6 +10,11 @@ class Expression extends PascalSyntax {
     SimpleExpr rightSimpleExpr;
     RelOperator relOperator;
     types.Type type;
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     private Expression(int lNum) {
         super(lNum);

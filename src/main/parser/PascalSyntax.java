@@ -5,6 +5,8 @@ import main.*;
 public abstract class PascalSyntax {
     public int lineNum;
 
+    abstract public void genCode(CodeFile f);
+
     public PascalSyntax(int n) {
         lineNum = n;
     }

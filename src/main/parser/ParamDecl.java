@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import static scanner.TokenKind.*;
@@ -14,6 +15,11 @@ public class ParamDecl extends PascalDecl {
     @Override
     public String identify() {
         return "<param decl> " +name+ " on line " + lineNum;
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+
     }
 
     @Override

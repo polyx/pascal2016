@@ -2,12 +2,18 @@ package parser;
 
 import java.util.ArrayList;
 
+import main.CodeFile;
 import scanner.Scanner;
 
 public class Term extends PascalSyntax {
     ArrayList<Factor> factorList = new ArrayList<>();
     ArrayList<FactorOperator> factorOperators = new ArrayList<>();
     types.Type type;
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     Term(int lNum) {
         super(lNum);

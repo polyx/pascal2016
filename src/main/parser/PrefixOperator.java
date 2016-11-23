@@ -8,6 +8,11 @@ import static scanner.TokenKind.*;
 public class PrefixOperator extends Operator {
     String name;
 
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     PrefixOperator(int lNum) {
         super(lNum);
     }

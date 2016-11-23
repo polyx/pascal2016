@@ -1,11 +1,17 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import static scanner.TokenKind.*;
 
 public class NamedConst extends UnsignedConstant {
     String name;
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     NamedConst(int lNum) {
         super(lNum);

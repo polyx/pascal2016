@@ -11,6 +11,11 @@ public class FuncCall extends Factor {
     String name;
     ArrayList<Expression> exprList;
 
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     FuncCall(int lNum) {
         super(lNum);
         this.exprList = new ArrayList<>();

@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 
@@ -9,6 +10,11 @@ public class VarDecl extends PascalDecl{
     Type typeName;
     VarDecl(String id, int lNum) {
         super(id, lNum);
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+
     }
 
     @Override

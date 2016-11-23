@@ -9,6 +9,11 @@ class WhileStatm extends Statement {
     Expression expr;
     Statement body;
 
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     WhileStatm(int lNum) {
         super(lNum);
     }

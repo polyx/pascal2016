@@ -1,12 +1,19 @@
 package parser;
 
 import java.util.ArrayList;
+
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 import static scanner.TokenKind.*;
 
 public class ConstDeclPart extends PascalSyntax {
     ArrayList<ConstDecl> constList = new ArrayList<>();
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     ConstDeclPart(int lNum) {
         super(lNum);

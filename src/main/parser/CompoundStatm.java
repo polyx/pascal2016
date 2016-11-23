@@ -7,6 +7,11 @@ import static scanner.TokenKind.*;
 public class CompoundStatm extends Statement {
     StatmList sl;
 
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     CompoundStatm(int lNum) {
         super(lNum);
     }

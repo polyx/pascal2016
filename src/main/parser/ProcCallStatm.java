@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 
@@ -11,6 +12,11 @@ import static scanner.TokenKind.*;
 public class ProcCallStatm extends Statement {
     String funcName;
     ArrayList<Expression> params = new ArrayList<>();
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     public ProcCallStatm(int n) {
         super(n);

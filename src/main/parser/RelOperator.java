@@ -10,6 +10,11 @@ import static scanner.TokenKind.*;
 public class RelOperator extends Operator {
     String token;
 
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     RelOperator(int lNum) {
         super(lNum);
     }

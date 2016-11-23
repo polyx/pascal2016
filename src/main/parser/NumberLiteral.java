@@ -8,6 +8,11 @@ import static scanner.TokenKind.*;
 public class NumberLiteral extends UnsignedConstant {
     int value;
 
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
+
     NumberLiteral(int lNum) {
         super(lNum);
     }

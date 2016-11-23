@@ -40,8 +40,9 @@ public class Main {
                 doTestChecker(s);
             }
             // Del 4:
-            // else
-            //     doRunRealCompiler(s);
+            else {
+                doRunRealCompiler(s);
+            }
         } catch (PascalError e) {
             System.out.println();
             System.err.println(e.getMessage());
@@ -54,7 +55,7 @@ public class Main {
     }
 
 
-    public static boolean u1seUnderscore() {
+    public static boolean useUnderscore() {
         // Should global names start with an '_'? Not with Linux/Unix.
         return !OS.matches(".*n.*x.*");
     }
@@ -127,25 +128,25 @@ public class Main {
 
     //     Del 4:
     private static void doRunRealCompiler(Scanner s) {
-//        System.out.print("Parsing...");
-//        Program prog = Program.parse(s);
-//        if (s.curToken.kind != eofToken)
-//            error("Scanner error: Garbage after the program!");
-//
-//        if (log.doLogPrettyPrint)
-//            prog.prettyPrint();
-//
-//        System.out.print(" checking...");
-//        library = new Library();
-//        prog.check(library, library);
-//
-//        System.out.print(" generating code...");
-//        CodeFile code = new CodeFile(baseFileName + ".s");
-//        library.genCode(code);
-//        prog.genCode(code);
-//        code.finish();
-//        System.out.println("OK");
-//
+        System.out.print("Parsing...");
+        Program prog = Program.parse(s);
+        if (s.curToken.kind != eofToken)
+            error("Scanner error: Garbage after the program!");
+
+        if (log.doLogPrettyPrint)
+            prog.prettyPrint();
+
+        System.out.print(" checking...");
+        library = new Library(-1);
+        prog.check(library, library);
+
+        System.out.print(" generating code...");
+        CodeFile code = new CodeFile(baseFileName + ".s");
+        library.genCode(code);
+        prog.genCode(code);
+        code.finish();
+        System.out.println("OK");
+//        not doing since I cant get .a to work for now
 //        assembleCode();
     }
 
@@ -154,15 +155,15 @@ public class Main {
         String pName = baseFileName;
         String sName = baseFileName + ".s";
 
-        String cmd[] = new String[8];
+        String cmd[] = new String[7];
         cmd[0] = "gcc";
         cmd[1] = "-m32";
         cmd[2] = "-o";
         cmd[3] = pName;
         cmd[4] = sName;
         cmd[5] = "-L.";
-        cmd[6] = "-L/hom/inf2100";
-        cmd[7] = "-lpas2016";
+//        cmd[6] = "-L/hom/inf2100";
+        cmd[6] = "-lpas2016";
 
         System.out.print("Running");
         for (String s : cmd) {

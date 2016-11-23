@@ -2,6 +2,7 @@ package parser;
 
 import java.util.ArrayList;
 
+import main.CodeFile;
 import scanner.Scanner;
 import types.*;
 import types.Type;
@@ -11,6 +12,11 @@ public class SimpleExpr extends PascalSyntax {
     ArrayList<Term> termList = new ArrayList<>();
     ArrayList<TermOperator> termOperList = new ArrayList<>();
     types.Type type;
+
+    @Override
+    public void genCode(CodeFile f) {
+
+    }
 
     SimpleExpr(int lNum) {
         super(lNum);
