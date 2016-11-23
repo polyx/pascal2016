@@ -20,6 +20,9 @@ public class Block extends PascalSyntax {
     HashMap<String, PascalDecl> decls;
     Block outerScope;
 
+    int nextOffset = 0;
+    int level;
+
     @Override
     public void genCode(CodeFile f) {
 
@@ -57,6 +60,7 @@ public class Block extends PascalSyntax {
     @Override
     public void check(Block outerScope, Library lib) {
         this.outerScope = outerScope;
+        this.level = outerScope.level + 1;
         if (constDeclPart != null) {
             constDeclPart.check(this, lib);
         }
