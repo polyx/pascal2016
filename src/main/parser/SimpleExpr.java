@@ -17,28 +17,27 @@ public class SimpleExpr extends PascalSyntax {
     public void genCode(CodeFile f) {
         termList.get(0).genCode(f);
         for(int i = 0; i < termOperList.size(); i++) {
-            switch(termOperList.get(i).name) {
-                case "+":
-                    f.genInstr("", "pushl", "%eax", "");
-                    termList.get(i+1).genCode(f);
-                    f.genInstr("", "movl", "%eax,%ecx" ,"start +");
-                    f.genInstr("", "popl", "%eax" ,"");
-                    f.genInstr("", "addl", "%ecx,%eax" ,"end +");
-                    break;
-                case "-":
-                    f.genInstr("", "pushl", "%eax", "");
-                    termList.get(i+1).genCode(f);
-                    f.genInstr("", "movl", "%eax,%ecx" ,"start -");
-                    f.genInstr("", "popl", "%eax" ,"");
-                    f.genInstr("", "subl", "%ecx,%eax" ,"end -");
-                    break;
-                case "or":
-                    f.genInstr("", "pushl", "%eax", "");
-                    termList.get(i+1).genCode(f);
-                    f.genInstr("", "movl", "%eax,%ecx" ,"start or");
-                    f.genInstr("", "popl", "%eax" ,"");
-                    f.genInstr("", "orl", "%ecx,%eax" ,"end or");
-                    break;
+            String s = termOperList.get(i).name;
+            if (s.equals("+")) {
+                f.genInstr("", "pushl", "%eax", "");
+                termList.get(i + 1).genCode(f);
+                f.genInstr("", "movl", "%eax,%ecx", "start +");
+                f.genInstr("", "popl", "%eax", "");
+                f.genInstr("", "addl", "%ecx,%eax", "end +");
+
+            } else if (s.equals("-")) {
+                f.genInstr("", "pushl", "%eax", "");
+                termList.get(i + 1).genCode(f);
+                f.genInstr("", "movl", "%eax,%ecx", "start -");
+                f.genInstr("", "popl", "%eax", "");
+                f.genInstr("", "subl", "%ecx,%eax", "end -");
+
+            } else if (s.equals("or")) {
+                f.genInstr("", "pushl", "%eax", "");
+                termList.get(i + 1).genCode(f);
+                f.genInstr("", "movl", "%eax,%ecx", "start or");
+                f.genInstr("", "popl", "%eax", "");
+                f.genInstr("", "orl", "%ecx,%eax", "end or");
             }
         }
         if(prefixOper != null) {

@@ -17,7 +17,6 @@ public class Variable extends Factor {
         if (pascDecl instanceof VarDecl){
             varOffset =  -pascDecl.declOffset - 32;
         }else if(pascDecl instanceof ParamDecl){
-//            varBlockLevel = varBlockLevel - 8;
             varOffset = pascDecl.declOffset;
         }
 
@@ -25,7 +24,7 @@ public class Variable extends Factor {
             if(constDecl.constant != null){
                 constDecl.constant.genCode(f);
             } else if(constDecl.name.equalsIgnoreCase("eol")) {
-                //according to kompendiet eol is used only in write
+                //eol is not used other than for printing
                 f.genInstr("", "movl", "$" + 10 + ",%eax", "eol char");
                 f.genInstr("", "pushl", "%eax", "");
                 f.genInstr("", "call", "write_char", "");

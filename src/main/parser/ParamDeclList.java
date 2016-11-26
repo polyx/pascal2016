@@ -14,8 +14,6 @@ public class ParamDeclList extends PascalSyntax {
 
     @Override
     public void genCode(CodeFile f) {
-        paramDecls.forEach(paramDecl -> paramDecl.genCode(f));
-//        f.genInstr("", "", "", "");
     }
 
     ParamDeclList(int lNum) {

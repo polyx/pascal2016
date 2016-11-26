@@ -22,7 +22,9 @@ public class FuncDecl extends ProcDecl {
                 "enter",
                 "$" + (32 + funcBody.nextOffset) + ",$" + funcBody.level,
                 "Start of " + name);
-        if(paramList != null) paramList.genCode(f);
+        if(paramList != null) {
+            paramList.genCode(f);
+        }
         funcBody.genCode(f);
         f.genInstr("", "movl", "-32(%ebp), %eax", "");
         f.genInstr("", "leave", "", "");

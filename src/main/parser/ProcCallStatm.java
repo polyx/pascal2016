@@ -17,7 +17,16 @@ public class ProcCallStatm extends Statement {
 
     @Override
     public void genCode(CodeFile f) {
-        if(funcName.equals("write")) {
+        if (!funcName.equals("write")) {
+            for (int i = params.size()-1; i >= 0; i--) {
+                params.get(i).genCode(f);
+                f.genInstr("", "pushl", "%eax", "");
+            }
+            f.genInstr("", "call", "proc$" + pd.labelName, "");
+            if(!params.isEmpty()){
+                f.genInstr("", "addl", "$"+(params.size()*4)+",%esp", "Pop params.");
+            }
+        } else {
             for (Expression param : params) {
                 param.genCode(f);
                 if (param.type instanceof IntType) {
@@ -26,19 +35,9 @@ public class ProcCallStatm extends Statement {
                 if (param.type instanceof CharType) {
                     printChar(f);
                 }
-                if(param.type instanceof types.BoolType) {
+                if(param.type instanceof BoolType) {
                     printBoolean(f);
                 }
-            }
-        } else {
-            int fc_block = pd.declLevel;
-            for (int i = params.size()-1; i >= 0; i--) {
-                params.get(i).genCode(f);
-                f.genInstr("", "pushl", "%eax", "");
-            }
-            f.genInstr("", "call", "proc$" + pd.labelName, "");
-            if(!params.isEmpty()){
-                f.genInstr("", "addl", "$"+(params.size()*4)+",%esp", "Pop params.");
             }
         }
     }

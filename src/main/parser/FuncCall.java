@@ -14,11 +14,11 @@ public class FuncCall extends Factor {
 
     @Override
     public void genCode(CodeFile f) {
-        int functionBlock = funcRef.declLevel;
-
-        for (int i = exprList.size()-1; i >= 0; i--) {
-            exprList.get(i).genCode(f);
+        int pramIndex = exprList.size()-1;
+        while (pramIndex >= 0) {
+            exprList.get(pramIndex).genCode(f);
             f.genInstr("", "pushl", "%eax", "");
+            pramIndex--;
         }
         f.genInstr("", "call", "func$" + funcRef.labelName, "");
         f.genInstr("", "addl", "$8,%esp", "");
