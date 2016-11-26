@@ -12,7 +12,12 @@ public class Term extends PascalSyntax {
 
     @Override
     public void genCode(CodeFile f) {
-
+        factorList.get(0).genCode(f);
+        for(int i = 0; i < factorOperators.size(); i++) {
+            f.genInstr("", "pushl", "%eax");
+            factorList.get(i+1).genCode(f);
+            factorOperators.get(i).genCode(f);
+        }
     }
 
     Term(int lNum) {

@@ -15,7 +15,7 @@ public class Main {
     public static Library library = new Library(-1);
     private static String sourceFileName, baseFileName;
     private static boolean testChecker = false,
-            testParser = false, testScanner = false;
+            testParser = false, testScanner = false, asmOnly = false;
     private static String OS;
 
 
@@ -81,6 +81,8 @@ public class Main {
                 testParser = log.doLogParser = log.doLogPrettyPrint = true;
             } else if (a.equals("-testscanner")) {
                 testScanner = log.doLogScanner = true;
+            } else if (a.equals("-noCompile")) {
+                asmOnly = true;
             } else if (a.startsWith("-")) {
                 warning("Warning: Unknown option " + a + " ignored.");
             } else if (sourceFileName != null) {
@@ -146,8 +148,9 @@ public class Main {
         prog.genCode(code);
         code.finish();
         System.out.println("OK");
-//        not doing since I cant get .a to work for now
-//        assembleCode();
+        if (!asmOnly){
+            assembleCode();
+        }
     }
 
 

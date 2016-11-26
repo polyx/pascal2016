@@ -14,7 +14,8 @@ public class ParamDeclList extends PascalSyntax {
 
     @Override
     public void genCode(CodeFile f) {
-
+        paramDecls.forEach(paramDecl -> paramDecl.genCode(f));
+//        f.genInstr("", "", "", "");
     }
 
     ParamDeclList(int lNum) {
@@ -24,7 +25,12 @@ public class ParamDeclList extends PascalSyntax {
 
     @Override
     public void check(Block curScope, Library lib) {
-        paramDecls.forEach(paramDecl -> paramDecl.check(curScope, lib));
+        int counter = 8;
+        for (ParamDecl paramDecl : paramDecls) {
+            paramDecl.check(curScope, lib);
+            paramDecl.declOffset = counter;
+            counter += 4;
+        }
     }
 
     @Override

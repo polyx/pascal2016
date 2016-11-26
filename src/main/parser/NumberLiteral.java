@@ -10,7 +10,9 @@ public class NumberLiteral extends UnsignedConstant {
 
     @Override
     public void genCode(CodeFile f) {
-
+        boolean boolVal = true;
+        if (constVal == 0){boolVal = false;}
+        f.genInstr("", "movl", "$" + constVal + ",%eax", boolVal + "");
     }
 
     NumberLiteral(int lNum) {

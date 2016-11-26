@@ -15,7 +15,35 @@ public class SimpleExpr extends PascalSyntax {
 
     @Override
     public void genCode(CodeFile f) {
-
+        termList.get(0).genCode(f);
+        for(int i = 0; i < termOperList.size(); i++) {
+            switch(termOperList.get(i).name) {
+                case "+":
+                    f.genInstr("", "pushl", "%eax", "");
+                    termList.get(i+1).genCode(f);
+                    f.genInstr("", "movl", "%eax,%ecx" ,"start +");
+                    f.genInstr("", "popl", "%eax" ,"");
+                    f.genInstr("", "addl", "%ecx,%eax" ,"end +");
+                    break;
+                case "-":
+                    f.genInstr("", "pushl", "%eax", "");
+                    termList.get(i+1).genCode(f);
+                    f.genInstr("", "movl", "%eax,%ecx" ,"start -");
+                    f.genInstr("", "popl", "%eax" ,"");
+                    f.genInstr("", "subl", "%ecx,%eax" ,"end -");
+                    break;
+                case "or":
+                    f.genInstr("", "pushl", "%eax", "");
+                    termList.get(i+1).genCode(f);
+                    f.genInstr("", "movl", "%eax,%ecx" ,"start or");
+                    f.genInstr("", "popl", "%eax" ,"");
+                    f.genInstr("", "orl", "%ecx,%eax" ,"end or");
+                    break;
+            }
+        }
+        if(prefixOper != null) {
+            prefixOper.genCode(f);
+        }
     }
 
     SimpleExpr(int lNum) {

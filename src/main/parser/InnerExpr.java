@@ -10,7 +10,7 @@ public class InnerExpr extends Factor {
 
     @Override
     public void genCode(CodeFile f) {
-
+        expr.genCode(f);
     }
 
     InnerExpr(int lNum) {

@@ -8,6 +8,7 @@ import static scanner.TokenKind.*;
 abstract class Factor extends PascalSyntax {
     static Factor factor;
     types.Type type;
+
     Factor(int lNum) {
         super(lNum);
     }
@@ -36,7 +37,6 @@ abstract class Factor extends PascalSyntax {
                 factor = Variable.parse(scanner);
             }
         // unsigned constant, ignoring named token and treating name tokens as variable above;
-        // TODO: fix in part 3 as per piazza comment from Dag.
         }else if (tokenKind == intValToken || tokenKind == charValToken){
             factor = UnsignedConstant.parse(scanner);
         }else if(tokenKind == leftParToken){ //inner condition

@@ -9,6 +9,7 @@ import static scanner.TokenKind.*;
 public class ProcDecl extends PascalDecl {
     ParamDeclList paramList;
     Block procBody;
+    String labelName;
 
     ProcDecl(String id, int lNum) {
         super(id, lNum);
@@ -16,16 +17,37 @@ public class ProcDecl extends PascalDecl {
 
     @Override
     public String identify() {
-        if (lineNum == -1){
+        if (lineNum == -1) {
             return "<proc decl> " + name + " in the library";
-        }else {
+        } else {
             return "<proc decl> " + name + " on line " + lineNum;
         }
     }
 
     @Override
     public void genCode(CodeFile f) {
-
+        labelName = f.getLabel(name.toLowerCase());
+        if (procBody.constDeclPart != null) {
+            procBody.constDeclPart.genCode(f);
+        }
+        if (procBody.varDeclPart != null) {
+            procBody.varDeclPart.genCode(f);
+        }
+        if (!procBody.funcDecls.isEmpty()) {
+            procBody.funcDecls.forEach(funcDecl -> funcDecl.genCode(f));
+        }
+        if (!procBody.procDecls.isEmpty()) {
+            procBody.procDecls.forEach(procDecl -> {
+                procDecl.genCode(f);
+            });
+        }
+        f.genInstr("proc$" + labelName,
+                "enter",
+                "$" + (32 + procBody.nextOffset) + ",$" + procBody.level,
+                "Procedure: " + name);
+        procBody.statmList.genCode(f);
+        f.genInstr("", "leave", "", "");
+        f.genInstr("", "ret", "", "");
     }
 
     @Override
@@ -36,6 +58,11 @@ public class ProcDecl extends PascalDecl {
             paramList.check(procBody, lib);
         }
         procBody.check(curScope, lib);
+        this.declLevel = procBody.level;
+        if (paramList != null){
+            paramList.paramDecls.forEach(paramDecl -> paramDecl.declLevel = this.declLevel);
+        }
+
     }
 
     @Override

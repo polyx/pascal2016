@@ -14,7 +14,7 @@ public class Constant extends PascalSyntax {
 
     @Override
     public void genCode(CodeFile f) {
-
+        constant.genCode(f);
     }
 
     Constant(int lNum) {

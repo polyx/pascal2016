@@ -35,9 +35,12 @@ public class Block extends PascalSyntax {
             funcDecls.forEach(funcDecl -> funcDecl.genCode(f));
         }
         if (!procDecls.isEmpty()) {
-            procDecls.forEach(procDecl -> procDecl.genCode(f));
+            procDecls.forEach(procDecl -> {
+                procDecl.genCode(f);
+            });
         }
-        if (statmList != null) {
+        // dont generate code for level 1 from here but from program.genCode
+        if (statmList != null && level != 1) {
             statmList.genCode(f);
         }
     }
@@ -74,7 +77,9 @@ public class Block extends PascalSyntax {
     @Override
     public void check(Block outerScope, Library lib) {
         this.outerScope = outerScope;
-        this.level = outerScope.level + 1;
+        if (this.level != 1){
+            this.level = outerScope.level + 1;
+        }
         if (constDeclPart != null) {
             constDeclPart.check(this, lib);
         }

@@ -11,7 +11,16 @@ class WhileStatm extends Statement {
 
     @Override
     public void genCode(CodeFile f) {
+        String conditionLabel = f.getLocalLabel();
+        String exitLabel = f.getLocalLabel();
 
+        f.genInstr(conditionLabel, "", "", "Start while-statement");
+        expr.genCode(f);
+        f.genInstr("", "cmpl", "$0,%eax", "");
+        f.genInstr("", "je", exitLabel, "");
+        body.genCode(f);
+        f.genInstr("", "jmp", conditionLabel, "");
+        f.genInstr(exitLabel, "", "", "end");
     }
 
     WhileStatm(int lNum) {

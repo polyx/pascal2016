@@ -22,6 +22,10 @@ public class VarDecl extends PascalDecl{
         typeName.check(curScope, lib);
         type = typeName.type;
         curScope.addDecl(name, this);
+        curScope.nextOffset += 4;
+        this.declOffset = curScope.nextOffset;
+        this.declLevel = curScope.level;
+
     }
 
     @Override

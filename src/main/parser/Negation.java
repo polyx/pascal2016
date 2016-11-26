@@ -10,7 +10,8 @@ public class Negation extends Factor {
 
     @Override
     public void genCode(CodeFile f) {
-
+        this.fact.genCode(f);
+        f.genInstr("", "xorl", "$0x1,%eax");
     }
 
     Negation(int lNum) {

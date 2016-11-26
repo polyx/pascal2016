@@ -11,7 +11,29 @@ public class FactorOperator extends Operator {
 
     @Override
     public void genCode(CodeFile f) {
-
+        if (id.equalsIgnoreCase("mod")){
+            f.genInstr("", "movl", "%eax,%ecx", "start mod");
+            f.genInstr("", "popl", "%eax");
+            f.genInstr("", "cdq", "");
+            f.genInstr("", "idivl", "%ecx");
+            f.genInstr("", "movl", "%edx,%eax", "end mod");
+            f.genInstr("", "", "");
+        }else if(id.equalsIgnoreCase("div")){
+            f.genInstr("", "movl", "%eax,%ecx", "start division");
+            f.genInstr("", "popl", "%eax");
+            f.genInstr("", "cdq", "");
+            f.genInstr("", "idivl", "%ecx", "end division");
+            f.genInstr("", "", "");
+        }else if(id.equalsIgnoreCase("*")){
+            f.genInstr("", "movl", "%eax,%ecx", "start *");
+            f.genInstr("", "popl", "%eax");
+            f.genInstr("", "imull", "%ecx,%eax", "end *");
+        }
+        else if(id.equalsIgnoreCase("and")){
+            f.genInstr("", "movl", "%eax,%ecx", "start 'and'");
+            f.genInstr("", "popl", "%eax");
+            f.genInstr("", "andl", "%ecx,%eax", "end 'and'");
+        }
     }
 
     FactorOperator(int lNum) {

@@ -27,17 +27,13 @@ public class Program extends PascalDecl {
         String labelName = f.getLabel(pname.toLowerCase());
         pname = pname.toLowerCase();
 
-//        f.genInstr("", ".extern write_char", "", "");
-//        f.genInstr("", ".extern write_int", "", "");
-//        f.genInstr("", ".extern write_String", "", "");
-//        f.genInstr("", ".globl _main", "", "");
         f.genInstr("", ".globl main", "", "");
-//        f.genInstr("_main", "", "", "");
         f.genInstr("main", "call", "prog$" + pname + "_" + pb.level, "Start program");
         f.genInstr("", "movl", "$0,%eax", "");
         f.genInstr("", "ret", "", "terminate the program");
-        f.genInstr("prog$" + labelName, "enter", "$" + occbyte + "," + "$" + pb.level, "Start of " + pname);
         pb.genCode(f);
+        f.genInstr("prog$" + labelName, "enter", "$" + occbyte + "," + "$" + pb.level, "Start of " + pname);
+        pb.statmList.genCode(f);
         f.genInstr("", "leave", "", "");
         f.genInstr("", "ret", "", "");
     }

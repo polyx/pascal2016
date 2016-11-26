@@ -1,5 +1,6 @@
 package parser;
 
+import main.CodeFile;
 import main.Main;
 import scanner.Scanner;
 
@@ -8,9 +9,24 @@ import static scanner.TokenKind.*;
 public class FuncDecl extends ProcDecl {
     TypeName funcTypeName;
     Block funcBody;
+    String labelName;
 
     FuncDecl(String id, int lNum) {
         super(id, lNum);
+    }
+
+    @Override
+    public void genCode(CodeFile f) {
+        labelName = f.getLabel(name.toLowerCase());
+        f.genInstr("func$" + labelName,
+                "enter",
+                "$" + (32 + funcBody.nextOffset) + ",$" + funcBody.level,
+                "Start of " + name);
+        if(paramList != null) paramList.genCode(f);
+        funcBody.genCode(f);
+        f.genInstr("", "movl", "-32(%ebp), %eax", "");
+        f.genInstr("", "leave", "", "");
+        f.genInstr("", "ret", "", "");
     }
 
     @Override
@@ -27,6 +43,8 @@ public class FuncDecl extends ProcDecl {
         funcTypeName.check(curScope, lib);
         type = funcTypeName.type;
         funcBody.check(curScope, lib);
+        this.declOffset = curScope.nextOffset + 4;
+        this.declLevel = curScope.level;
     }
 
     @Override

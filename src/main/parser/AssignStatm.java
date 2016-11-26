@@ -13,6 +13,25 @@ public class AssignStatm extends Statement {
 
     @Override
     public void genCode(CodeFile f) {
+        expr.genCode(f);
+        if (var.pascDecl instanceof FuncDecl) {
+            int varBlock = -4 * (var.pascDecl.declLevel + 1);
+            f.genInstr("", "movl", varBlock + "(%ebp),%edx", "");
+            f.genInstr("", "movl", "%eax,-32(%edx)", "");
+        }
+
+        if (var.pascDecl instanceof VarDecl) {
+            VarDecl varRef = (VarDecl) var.pascDecl;
+
+            int varBlock = -4 * var.pascDecl.declLevel;
+            int varOffset = 32 + var.pascDecl.declOffset;
+
+            f.genInstr("", "movl", varBlock + "(%ebp),%edx", "");
+            f.genInstr("",
+                    "movl",
+                    "%eax,-" + varOffset + "(%edx)",
+                    "^^ above is " + var.name + " := ");
+        }
 
     }
 

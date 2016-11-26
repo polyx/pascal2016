@@ -11,7 +11,8 @@ public class CharLiteral extends UnsignedConstant {
 
     @Override
     public void genCode(CodeFile f) {
-
+        char c = charVal.charAt(0);
+        f.genInstr("", "movl", "$" + (int)c + ",%eax", charVal);
     }
 
     CharLiteral(int lNum) {

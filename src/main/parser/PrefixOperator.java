@@ -10,7 +10,9 @@ public class PrefixOperator extends Operator {
 
     @Override
     public void genCode(CodeFile f) {
-
+        if (name.equals("-")){
+            f.genInstr("","negl","%eax","- (prefix)");
+        }
     }
 
     PrefixOperator(int lNum) {

@@ -10,10 +10,18 @@ import static scanner.TokenKind.*;
 public class FuncCall extends Factor {
     String name;
     ArrayList<Expression> exprList;
+    FuncDecl funcRef;
 
     @Override
     public void genCode(CodeFile f) {
+        int functionBlock = funcRef.declLevel;
 
+        for (int i = exprList.size()-1; i >= 0; i--) {
+            exprList.get(i).genCode(f);
+            f.genInstr("", "pushl", "%eax", "");
+        }
+        f.genInstr("", "call", "func$" + funcRef.labelName, "");
+        f.genInstr("", "addl", "$8,%esp", "");
     }
 
     FuncCall(int lNum) {
@@ -24,7 +32,7 @@ public class FuncCall extends Factor {
     @Override
     public void check(Block curScope, Library lib) {
         PascalDecl declRef = curScope.findDecl(name.toLowerCase(), this);
-        FuncDecl funcRef = (FuncDecl) declRef;
+        funcRef = (FuncDecl) declRef;
         declRef.checkWhetherFunction(this);
         if (exprList.size() != funcRef.paramList.paramDecls.size()){
             error("argument number mismatch.\nExpected: "+ funcRef.paramList.paramDecls.size()

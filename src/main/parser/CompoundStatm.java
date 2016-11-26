@@ -9,7 +9,7 @@ public class CompoundStatm extends Statement {
 
     @Override
     public void genCode(CodeFile f) {
-
+        sl.genCode(f);
     }
 
     CompoundStatm(int lNum) {

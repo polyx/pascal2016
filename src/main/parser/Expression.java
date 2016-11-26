@@ -13,7 +13,49 @@ class Expression extends PascalSyntax {
 
     @Override
     public void genCode(CodeFile f) {
-
+        leftSimpleExpr.genCode(f);
+        if(relOperator != null) {
+            f.genInstr("", "pushl", "%eax");
+            rightSimpleExpr.genCode(f);
+            switch(relOperator.token) {
+                case "=":
+                    f.genInstr("", "popl", "%ecx");
+                    f.genInstr("", "cmpl", "%eax,%ecx");
+                    f.genInstr("", "movl", "$0,%eax");
+                    f.genInstr("", "sete", "%al");
+                    break;
+                case ">":
+                    f.genInstr("", "popl", "%ecx");
+                    f.genInstr("", "cmpl", "%eax,%ecx");
+                    f.genInstr("", "movl", "$0,%eax");
+                    f.genInstr("", "setg", "%al");
+                    break;
+                case "<=":
+                    f.genInstr("", "popl", "%ecx");
+                    f.genInstr("", "cmpl", "%eax,%ecx");
+                    f.genInstr("", "movl", "$0,%eax");
+                    f.genInstr("", "setle", "%al", "test <=");
+                    break;
+                case "<>":
+                    f.genInstr("", "popl", "%ecx");
+                    f.genInstr("", "cmpl", "%eax,%ecx");
+                    f.genInstr("", "movl", "$0,%eax");
+                    f.genInstr("", "setne", "%al", "test <>");
+                    break;
+                case ">=":
+                    f.genInstr("", "popl", "%ecx");
+                    f.genInstr("", "cmpl", "%eax,%ecx");
+                    f.genInstr("", "movl", "$0,%eax");
+                    f.genInstr("", "setge", "%al", "test >=");
+                    break;
+                case "<":
+                    f.genInstr("", "popl", "%ecx");
+                    f.genInstr("", "cmpl", "%eax,%ecx");
+                    f.genInstr("", "movl", "$0,%eax");
+                    f.genInstr("", "setl", "%al", "test <");
+                    break;
+            }
+        }
     }
 
     private Expression(int lNum) {
