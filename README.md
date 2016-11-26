@@ -25,3 +25,5 @@ Tests rely on Junit which is pulled automatically by gradle
 Run application: `gradle run -PappArgs="['arg1', 'args2']"` or run jar directly from `/build/lib`
 
 `gradle clean` nukes `build/`
+
+-noCompile argument will allow to only generate assembly code and will not trigger gcc, useful for testing on non linux machines. 
